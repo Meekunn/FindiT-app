@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
+$otherColor: #1976D2;
+
+.main-welcome{
+    display: flex;
+    justify-content: center;
+}
+.welcome-box{
+    width: 800px;
+    height: 550px;
+    margin: 120px 20px;
+    display: flex;
+}
+
+.box-content{
+    background-color: #f9f9f9;
+    width: 400px;
+    padding: 100px 50px;
+
+    h1{
+        font-size: 20px;
+        font-family: 'Pacifico', cursive;
+        text-align: center;
+        margin: 10px 2px;
+    }
+    p{
+        color: #767171;
+        font-size: 15px;
+        font-family: 'Lato', sans-serif;
+        margin: 10px 4px;
+    }
+    .MuiButton-contained{
+        margin: 10px 20px;
+        background-color: $otherColor;
+        width: 230px;
+
+        .MuiButton-label{
+            color: #f9f9f9;
+            font-family: 'Lato', sans-serif;
+            font-size: 12px;
+            padding: 3px 8px;
+        }
+    }
+    .MuiButton-outlined{
+        border: 2px solid $otherColor;
+        margin: 10px 20px;
+        background-color: transparent;
+        width: 230px;
+
+        .MuiButton-label{
+            color: $otherColor;
+            font-family: 'Lato', sans-serif;
+            font-size: 12px;
+            padding: 3px 8px;
+        }
+    }
+}
+
+
+.box-blank:empty{
+    background-color: $otherColor;
+    width: 400px;
+}
