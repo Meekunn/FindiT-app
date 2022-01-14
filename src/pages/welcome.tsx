@@ -1,9 +1,9 @@
 import React from "react";
 import '../style/welcome.scss'
 import { Button } from "@material-ui/core";
-import { Container, Box } from "@material-ui/core";
 
 const Welcome = () =>{
+
     return(
         <div className='main-welcome'>
             <div className='welcome-box'>
