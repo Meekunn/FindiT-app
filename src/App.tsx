@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Routes, AuthRoute } from 'react-router-dom';
+import {BrowserRouter, Switch, Route } from 'react-router-dom'
+import AuthRoute from './components/AuthRoute'
 import routes from './config/route'
 
 function App() {
   return (
     <div className="App">
-       <BrowserRouter>
-        <Routes>
+      <BrowserRouter>
+        <Switch>
           {routes.map((route, index) => {
             return(
              <Route 
                 key={index}
                 path={route.path}
-                exact={route.exact}
-                render={(props: RouteComponentProps<any>) => {
-                  if(route.protected)
-                    {return <AuthRoute><route.component {...props} /></AuthRoute>}
+                element={route.element}
+              //   render={(props: RouteComponentProps<any>) => {
+              //     if(route.protected)
+              //       {return <AuthRoute><route.component {...props} /></AuthRoute>}
 
-                  return <route.component 
-                  {...props}
-                  {...route.props} />
-              }}
+              //     return <route.component 
+              //     {...props}
+              //     {...route.props} />
+              // }}
             />
           )})}
-        </Routes>
+        </Switch>
       </BrowserRouter>
     </div>
   );

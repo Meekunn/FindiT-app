@@ -1,6 +1,6 @@
 import React from "react";
 import '../style/welcome.scss'
-import { Button } from "@material-ui/core";
+import { Button } from "@material-ui/core"
 
 const Welcome = () =>{
 

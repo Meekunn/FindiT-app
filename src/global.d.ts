@@ -1,7 +1,11 @@
+interface IApp {}
+
+interface IAuthRoute {}
+
 interface IRoutes {
     path: string;
     exact: boolean;
-    component: any;
+    element: any;
     name: string;
     protected: boolean;
     props?: any;
