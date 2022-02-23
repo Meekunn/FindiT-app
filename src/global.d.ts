@@ -2,10 +2,14 @@ interface IApp {}
 
 interface IAuthRoute {}
 
+interface IPageProps {
+    name?: string;
+}
+
 interface IRoutes {
     path: string;
     exact: boolean;
-    element: any;
+    component: any;
     name: string;
     protected: boolean;
     props?: any;

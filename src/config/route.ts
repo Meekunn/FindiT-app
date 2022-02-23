@@ -3,16 +3,16 @@ import SignUp from "../pages/auth/signup";
 
 const routes:IRoutes[] = [
     {
-        path: '/welcome',
+        path: '/',
         exact: true,
-        element: Welcome,
+        component: Welcome,
         name: 'welcome',
         protected: false
     },
     {
         path: '/signup',
         exact: true,
-        element: SignUp,
+        component: SignUp,
         name: 'signup',
         protected: false
     }

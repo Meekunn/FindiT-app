@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { FC, useState } from 'react'
 import '../../style/signup.scss'
 import { auth, db } from '../../config/firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { Button } from "@material-ui/core"
 import { TextField } from '@material-ui/core'
 
-const SignUp = () =>{
+const SignUp:FC<IPageProps> = (props:any) =>{
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
