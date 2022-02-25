@@ -1,7 +1,8 @@
 import { FC, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { auth } from '../../config/firebase'
+import { auth, db } from '../../config/firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
 import { Button } from "@material-ui/core"
 import { TextField } from '@material-ui/core'
 import '../../style/signup.scss'
@@ -15,6 +16,14 @@ const SignUp:FC<ILecturersAuth> = (props) => {
     const [confirm, setConfirm] = useState<string>('')
     const [error, setError] = useState<string>('')
     const [signup, setSignup] = useState<boolean>(false)
+
+    const handleNew = async (id: any) => {
+        const docRef = doc(db, "lecturers", id)
+        const payload = {
+            email
+        }
+        const setDocRef = await setDoc(docRef, payload)
+    }
 
     const verifyEmail = (user: any) => {
         if(user) {
@@ -41,10 +50,11 @@ const SignUp:FC<ILecturersAuth> = (props) => {
         setSignup(true)
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then( (userCredential: any) =>{
+        .then( async (userCredential: any) =>{
             const user = auth.currentUser
             if(user){
                 verifyEmail(user)
+                await handleNew(userCredential.user.uid)
                 if(user.emailVerified){
                     history.push('/home')
                 }

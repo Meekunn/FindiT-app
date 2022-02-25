@@ -15,16 +15,13 @@ interface IRoutes {
     props?: any;
 }
 
-interface ILecturer {
-    id: string;
-    firstname: string;
-    lastname: string;
+interface ILecturerBasic {
+    fullname: string;
     title: string;
-    phone: number;
-    email: string;
+    phone: string;
+    department: string;
     location: string;
     office: string;
-    bio: string;
 }
 
 interface ILecturersAuth{

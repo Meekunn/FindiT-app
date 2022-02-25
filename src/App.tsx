@@ -5,12 +5,16 @@ import Welcome from './pages/welcome'
 import SignUp from './pages/auth/signup'
 import SearchPage from './pages/searchpage'
 import SignIn from './pages/auth/signin'
+import ProfileSetup from './pages/setup'
 
 const App:FC<IApp> = (props:any) => {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
+          <Route path="/setup">
+            <ProfileSetup fullname={props.fullname} title={props.title} location={props.location} phone={props.phone} office={props.office} department={props.department} />
+          </Route>
           <Route path="/signin">
             <SignIn />
           </Route>

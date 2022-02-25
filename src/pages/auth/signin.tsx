@@ -24,7 +24,7 @@ const SignIn:FC<IPageProps> = (props) => {
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: any) => {
             const user = userCredential.user
-            history.push("/home")
+            history.push('/setup')
         })
         .catch((error:any) => {
             setError(error.message)
