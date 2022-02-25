@@ -4,17 +4,21 @@ import {BrowserRouter, Switch, Route } from 'react-router-dom'
 import Welcome from './pages/welcome'
 import SignUp from './pages/auth/signup'
 import SearchPage from './pages/searchpage'
+import SignIn from './pages/auth/signin'
 
 const App:FC<IApp> = (props:any) => {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
+          <Route path="/signin">
+            <SignIn />
+          </Route>
           <Route path="/home">
             <SearchPage />
           </Route>
           <Route path="/signup">
-            <SignUp email={Email} password={password} />
+            <SignUp email={props.email} password={props.password} />
           </Route>
           <Route path="/">
             <Welcome />

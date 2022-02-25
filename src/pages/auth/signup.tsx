@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../config/firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { Button } from "@material-ui/core"
@@ -7,6 +7,7 @@ import { TextField } from '@material-ui/core'
 import '../../style/signup.scss'
 
 const SignUp:FC<ILecturersAuth> = (props) => {
+
     const history = useHistory()
 
     const [email, setEmail] = useState<string>('')
@@ -109,7 +110,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                     </div>
                     <div className='signup-footer'>
                         <p>Already have an account?</p>
-                        <p>Sign In</p>
+                        <p><Link to="/signin">Sign In</Link></p>
                     </div>
                 </div>
             </div>

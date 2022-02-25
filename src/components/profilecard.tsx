@@ -17,7 +17,7 @@ const ProfileCard = () => {
             <Avatar
             style={{width: 55, height: 55}}
             alt="User"
-            src="https://www.pngall.com/profile-png/download/51565"
+            src="../images/profile-avatar.jpg"
             ></Avatar>
           </Badge>
           <h1>Name</h1>
