@@ -17,7 +17,7 @@ const Welcome = () =>{
                     <h1>Welcome to FindiT</h1>
                     <p>Dedicated to help you improve your relation with lecturers.</p>
                     <Button variant="contained"><Link to='/signup'>Sign up as a lecturer</Link></Button>
-                    <Button variant="outlined"><Link to='/search'>Continue as a Student</Link></Button>
+                    <Button variant="outlined"><Link to='/home'>Continue as a Student</Link></Button>
                 </div>
                 <div className='box-blank'>
                 </div>

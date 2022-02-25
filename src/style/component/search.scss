@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Nunito:wght@200;500;600&display=swap');
+$background : #f3f0f0;
+$otherColor: #1976D2;
+$font-color: #5f5c5c;
+
+.nav-wrap {
+    background-color: $background;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+h1{
+    font-size: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    margin: 8px 15px;
+    color: $font-color;
+}
+
+.search-contain {
+    display: flex;
+}

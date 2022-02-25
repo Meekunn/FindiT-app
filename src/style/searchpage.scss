@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Nunito:wght@200;500;600&display=swap');
+$background : #f3f0f0;
+$otherColor: #1976D2;
+$font-color: #5f5c5c;
+
+.home-wrapper{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.home-contain{
+    display: flex;
+    flex-direction: row;
+}
+
+.side-bar{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    font-size: 2rem;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    color: $font-color;
+    text-align: center;
+}
+
+.contents{
+    width: 75%;
+    height: 100vh;
+    background-color: $background;
+}

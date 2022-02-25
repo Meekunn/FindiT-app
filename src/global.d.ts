@@ -14,3 +14,20 @@ interface IRoutes {
     protected: boolean;
     props?: any;
 }
+
+interface ILecturer {
+    id: string;
+    firstname: string;
+    lastname: string;
+    title: string;
+    phone: number;
+    email: string;
+    location: string;
+    office: string;
+    bio: string;
+}
+
+interface ILecturersAuth{
+    email: string;
+    password: string;
+}
