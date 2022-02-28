@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
-import { getAuth } from "firebase/auth"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
+import { getStorage } from "firebase/storage"
+import { useState, useEffect } from "react"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -18,3 +20,20 @@ const app = initializeApp(firebaseConfig)
 export const analytics = getAnalytics(app)
 export const auth = getAuth(app)
 export const db = getFirestore(app)
+export const storage = getStorage(app)
+
+// const useAuth = () => {
+//   const [currentUser, setCurrentUser] = useState<any | null>()
+
+//   useEffect(() => {
+//     const unsub = onAuthStateChanged(auth, user=> {
+//         if(user){
+//           setCurrentUser(user)
+//           alert("user signed in")
+//         } alert ("user signed out")
+//       })
+//     return unsub
+//   }, [])
+//   return currentUser
+// }
+// export default useAuth

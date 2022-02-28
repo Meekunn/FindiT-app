@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
+$otherColor: #1976D2;
+
+.setup-wrap{
+    display: flex;
+    justify-content: center;
+    background-color: #e9e9e9;
+}
+
+.setup-contain{
+    width: 500px;
+    height: auto;
+    margin: 50px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+h1{
+    font-size: 20px;
+    font-family: 'Pacifico', cursive;
+    text-align: left;
+    margin: 5px 2px;
+}
+p{
+    color: #767171;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    margin: 5px 4px;
+}
+
+.img-upload{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+
+    img{
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+    input{
+        margin: 2px;
+    }
+    .MuiButton-outlined{
+        border: 2px solid $otherColor;
+        margin: 3px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+}
+
+
+.setup-form{
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+
+    .MuiFormControl-root{
+        margin-top: 5px;
+
+        .MuiFormLabel-root{
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+        }
+    }
+}
+
+.status-btns{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+
+    .active{
+        border: 1.5px solid #16e716;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+    .active:hover{
+        border: 1.5px solid #16e716;
+        background-color: #16e716;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+    .busy{
+        border: 1.5px solid #ffef0c;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+    .busy:hover{
+        border: 1.5px solid #ffef0c;
+        background-color: #ffef0c;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+    .absent{
+        border: 1.5px solid #e13d3d;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+    .absent:hover{
+        border: 1.5px solid #e13d3d;
+        background-color: #e13d3d;
+        font-family: 'Lato', sans-serif;
+        font-weight: 900;
+    }
+}
