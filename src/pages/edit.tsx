@@ -1,22 +1,16 @@
-import { FC, useState, ChangeEvent, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { auth, db, storage } from '../config/firebase'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc,setDoc } from 'firebase/firestore'
+import { db, auth, storage } from '../config/firebase'
 import { updateProfile } from 'firebase/auth'
-import { ref, getDownloadURL, uploadBytes  } from 'firebase/storage'
-import { Button, TextField, MenuItem, Avatar } from '@material-ui/core'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { TextField, Button, MenuItem } from '@material-ui/core'
 import '../style/setup.scss'
 
-const ProfileSetup:FC<ILecturerBasic> = props => {
+const Edit = () => {
 
     const history = useHistory()
     const currentUser = auth.currentUser
-
-    // useEffect(() => {
-    //     if(currentUser && currentUser.photoURL){
-    //         setPhotoURL(currentUser.photoURL)
-    //     }
-    // }, [currentUser])
 
     const titles = [
         {
@@ -39,7 +33,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
 
     const departments = [
         {
-            value: "Information and Communication Technology",
+            value: "Informationa dand Communication Technology",
             label: "ICT"
         },
         {
@@ -48,17 +42,36 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         }
     ]
 
-    const [fullname, setFullname] = useState<string>("")
+    const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
+    const [bio, setBio] = useState<string>("")
+    const [photo, setPhoto] = useState<any>()
+    const [preview, setPreview] = useState<any>()
+    const [photoURL, setPhotoURL] = useState<any>()
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
-    const [location, setLocation] = useState<string>("")
     const [office, setOffice] = useState<string>("")
-    const [photo, setPhoto] = useState<any>(null)
-    const [photoURL, setPhotoURL] = useState<any>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
+    const [location, setLocation] = useState<string>("")
     const [uploading, setUploading] = useState<boolean>(false)
-    const [error, setError] = useState<string>("")
-    const [setup, setSetup] = useState<boolean>(false)
+
+    useEffect(() => {
+
+        const state = history.location.state as  ILecturers | undefined
+        setName(state?.fullname || '')
+        setPhone(state?.phone|| '')
+        setTitle(state?.title|| '')
+        setDepartment(state?.department || '')
+        setLocation(state?.location || '')
+        setOffice(state?.office || '')
+        setBio(state?.bio || '')
+        setPhotoURL(state?.photoURL || "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
+    }, [] )
+
+    const handlePhoto = (e:any) => {
+        if(e.target.files[0])
+            //window.URL.createObjectURL(e.target.files[0])
+            setPhoto(e.target.files[0])
+    }
 
     const uploadPicture = async (photo: any, id: any, setUploading: any) => {
         const photoRef = ref(storage, "/lecturer" + id.uid + ".png")
@@ -68,9 +81,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         await uploadBytes(photoRef, photo)
         .then(() => {
             getDownloadURL(photoRef).then((photoURL) => {
-                if(currentUser){
-                    setPhotoURL(currentUser.photoURL)
-                }
+                setPhotoURL(photoURL)
             }).catch((error:any) => {
                 console.log(error.message, "error getting photourl")
             })
@@ -86,11 +97,6 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
     const submitUpload = () => {
         uploadPicture(photoURL,currentUser,setUploading)
     }
-    const handlePhoto = (e:any) => {
-        if(e.target.files[0])
-            setPhotoURL(window.URL.createObjectURL(e.target.files[0]))
-            setPhoto(e.target.files[0])
-    }
 
     const handleTitle = (e:ChangeEvent<HTMLInputElement>) =>{
         setTitle(e.target.value)
@@ -100,28 +106,29 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         setDepartment(e.target.value)
     }
 
-    const handleSetup = async () => {
+    const handleEdit = async () => {
         const user = auth.currentUser
         if(user !== null){
             const uid = user.uid
             const docRef = doc(db, "lecturers", uid)
             const payload = {
-                fullname,
+                name,
                 title,
                 phone,
                 department,
                 location,
-                office
+                office,
+                bio
             }
             const setDocRef = await setDoc(docRef, payload, {merge:true})
         }
-        history.replace('/dashboard')
+        history.push('/dashboard')
     }
 
     return(
         <div className='setup-wrap'>
             <div className='setup-contain'>
-                <h1>Profile Setup</h1>
+                <h1>Profile Edit</h1>
                 <p>Dedicated to helping you navigate your relation with lecturers</p>
                 <div className='img-upload'>
                     <img src={photoURL} alt='User-Image' />
@@ -130,28 +137,28 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                 </div>
                 <div className='setup-form'>
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     label="Full Name"
                     placeholder=""
-                    value={fullname}
-                    onChange={(e) =>setFullname(e.target.value)}
+                    value={name}
+                    onChange={(e) =>setName(e.target.value)}
                     />
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     select
                     label="Title"
                     placeholder=""
                     value={title}
                     onChange={handleTitle}
                     >
-                        {titles.map((opt: any) => {
-                            <MenuItem key={opt.value} value={opt.value}>
-                                {opt.label}
+                        {titles.map((option: any) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
                             </MenuItem>
-                        })}
+                        ))}
                     </TextField>
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     
                     label="Phone Number"
                     placeholder=""
@@ -173,14 +180,14 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                         ))}
                     </TextField>
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     label="Location"
                     placeholder="SEET Building"
                     value={location}
                     onChange={(e) =>setLocation(e.target.value)}
                     />
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     label="Office"
                     placeholder="38, 1st Floor"
                     value={office}
@@ -191,11 +198,11 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                         <Button variant="outlined" className='busy'>Busy</Button>
                         <Button variant="outlined" className='absent'>Absent</Button>
                     </div>
-                    <Button variant="contained" onClick={handleSetup}>DONE</Button>
+                    <Button variant="contained" onClick={handleEdit}><Link to="/dashboard">DONE</Link></Button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default ProfileSetup
+export default Edit

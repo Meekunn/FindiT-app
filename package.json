@@ -14,6 +14,7 @@
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.1",
+    "axios": "^0.26.0",
     "env-cmd": "^10.1.0",
     "firebase": "^9.6.3",
     "react": "^17.0.2",
@@ -26,7 +27,7 @@
   },
   "scripts": {
     "start": "env-cmd -f .env.development react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,42 +1,35 @@
-import React, { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import './App.css';
-import {BrowserRouter, Switch, Route } from 'react-router-dom'
-import Welcome from './pages/welcome'
-import SignUp from './pages/auth/signup'
-import SearchPage from './pages/searchpage'
-import SignIn from './pages/auth/signin'
-import ProfileSetup from './pages/setup'
+import {BrowserRouter, Switch, Route, RouteComponentProps } from 'react-router-dom'
+import { LinearProgress } from '@material-ui/core'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './config/firebase'
+import routes from './config/route'
+import AuthRoute from './components/AuthRoute'
+
 
 const App:FC<IApp> = (props:any) => {
+
+  const [initializing, setInitializing] = useState<boolean>(false)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if(user){
+        console.log('user detected')
+      } else {
+        console.log('No user detected')
+      }
+      setInitializing(false)
+    })
+  }, [])
+
+  if(initializing){
+    <LinearProgress />
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Switch>
-          <Route path="/setup">
-            <ProfileSetup fullname={props.fullname} title={props.title} location={props.location} phone={props.phone} office={props.office} department={props.department} />
-          </Route>
-          <Route path="/signin">
-            <SignIn />
-          </Route>
-          <Route path="/home">
-            <SearchPage />
-          </Route>
-          <Route path="/signup">
-            <SignUp email={props.email} password={props.password} />
-          </Route>
-          <Route path="/">
-            <Welcome />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
-}
-
-export default App;
-
-
-{/* <BrowserRouter>
         <Switch>
           {routes.map((route, index) => {
             return(
@@ -55,4 +48,9 @@ export default App;
             />
           )})}
         </Switch>
-      </BrowserRouter> */}
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;

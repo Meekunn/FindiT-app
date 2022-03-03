@@ -7,14 +7,15 @@ $otherColor: #1976D2;
 }
 .welcome-box{
     width: 800px;
-    height: 550px;
-    margin: 120px 20px;
+    height: fit-content;
+    margin: 70px 20px;
     display: flex;
 }
 
 .box-content{
     background-color: #f9f9f9;
     width: 400px;
+    height: fit-content;
     padding: 100px 50px;
 
     h1{
@@ -40,6 +41,11 @@ $otherColor: #1976D2;
             font-size: 12px;
             padding: 3px 8px;
         }
+        a{
+            color: #f9f9f9;
+            font-family: 'Lato', sans-serif;
+            text-decoration: none;
+        }
     }
     .MuiButton-outlined{
         border: 2px solid $otherColor;
@@ -53,6 +59,11 @@ $otherColor: #1976D2;
             font-size: 12px;
             padding: 3px 8px;
         }
+        a{
+            color: $otherColor;
+            font-family: 'Lato', sans-serif;
+            text-decoration: none;
+        }
     }
 }
 
@@ -60,4 +71,75 @@ $otherColor: #1976D2;
 .box-blank:empty{
     background-color: $otherColor;
     width: 400px;
+}
+
+@media screen and (max-width: 900px) {
+    .welcome-box{
+        width: 700px;
+        height: 0;
+        margin: 50px 20px;
+    }
+    .box-content{
+        p{
+            font-size: 12px;
+        }
+    }
+    .box-blank{
+        height: 415px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .welcome-box{
+        margin: 50px 0;
+        display: flex;
+        height: fit-content;
+        justify-content: center;
+    }
+    .box-content{
+        width: 450px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p{
+            margin-bottom: 30px;
+            font-size: 12px;
+        }
+    }
+    .box-blank{
+        width: 0;
+    }
+}
+@media screen and (max-width: 450px) {
+    .welcome-box{
+        width: 300px;
+        height: 0;
+        margin: 50px 0;
+    }
+    .box-content{
+        width: 300px;
+        h1{
+            font-size: 18px;
+            margin: 5px;
+        }
+        p{
+            font-size: 10px;
+        }
+        .MuiButton-contained{
+            margin: 5px;
+            width: 200px;
+            .MuiButton-label{
+                font-size: 10px;
+                padding: 3px;
+            }
+        }
+        .MuiButton-outlined{
+            margin: 5px;
+            width: 200px;
+            .MuiButton-label{
+                font-size: 10px;
+                padding: 3px;
+            }
+        }
+    }
 }

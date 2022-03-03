@@ -7,9 +7,8 @@ $otherColor: #1976D2;
 }
 
 .signin-box{
-    width: 500px;
-    height: 550px;
-    margin: 120px 20px;
+    height: fit-content;
+    margin: 60px 0;
     display: flex;
 }
 
@@ -25,10 +24,13 @@ $otherColor: #1976D2;
         margin: 10px 2px;
     }
     p{
-        color: #767171;
         font-size: 12px;
         font-family: 'Lato', sans-serif;
         margin: 10px 4px;
+        a{
+            color: #1976D2;
+            text-decoration: none;
+        }
     }
     .MuiButton-contained{
         margin: 15px 5px;
@@ -61,4 +63,35 @@ $otherColor: #1976D2;
 
 .signin-footer{
     display: flex;
+}
+
+
+
+@media screen and (max-width: 700px){
+    .signin-box{
+        margin: 60px 0;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .signin-box{
+        height: fit-content;
+        margin: 50px 0;
+        display: flex;
+    }
+    .signin-content{
+        width: 300px;
+        padding: 40px 30px;
+        .MuiButton-contained {
+            width: 230px;
+        }
+    }
+    .form{
+        .MuiFormControl-root{
+            width: 230px;
+        }
+        .MuiInputLabel-formControl{
+            font-size: 12px;
+        }
+    }
 }

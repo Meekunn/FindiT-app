@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../config/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Button } from "@material-ui/core"
@@ -20,11 +20,9 @@ const SignIn:FC<IPageProps> = (props) => {
         if (error !== ""){
             setError("")
         }
-
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: any) => {
-            const user = userCredential.user
-            history.push('/setup')
+            history.push('/dashboard')
         })
         .catch((error:any) => {
             setError(error.message)
@@ -61,7 +59,7 @@ const SignIn:FC<IPageProps> = (props) => {
                     </div>
                     <div className='signin-footer'>
                         <p>New Here?</p>
-                        <p>Sign Up</p>
+                        <p><Link to='/signup'>Sign Up</Link></p>
                     </div>
                 </div>
             </div>

@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
 $otherColor: #1976D2;
 
-.setup-wrap{
+.dash-wrap{
     display: flex;
     justify-content: center;
     background-color: #e9e9e9;
 }
 
-.setup-contain{
+.dash-contain{
     width: 500px;
     height: fit-content;
-    margin: 50px;
+    margin: 20px 0;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -21,12 +21,6 @@ h1{
     font-family: 'Pacifico', cursive;
     text-align: left;
     margin: 5px 2px;
-}
-p{
-    color: #767171;
-    font-size: 12px;
-    font-family: 'Lato', sans-serif;
-    margin: 5px 4px;
 }
 
 .img-upload{
@@ -49,10 +43,14 @@ p{
         font-family: 'Lato', sans-serif;
         font-weight: 900;
     }
+    a{
+        text-decoration: none;
+        color: #1976D2;
+    }
 }
 
 
-.setup-form{
+.dash-form{
     margin: 5px 0;
     display: flex;
     flex-direction: column;
@@ -64,10 +62,6 @@ p{
             font-family: 'Lato', sans-serif;
             font-size: 15px;
         }
-    }
-    .MuiButton-contained{
-        background-color: #1976D2;
-        color: #e9e9e9;
     }
 }
 
@@ -112,43 +106,23 @@ p{
 }
 
 @media screen and (max-width: 450px){
-    .setup-contain{
+    .dash-contain{
         width: 300px;
-        margin: 10px 0;
+        height: fit-content;
+        margin: 20px 0;
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
     }
     h1{
         font-size: 15px;
-        margin: 3px;
-    }
-    p{
-        font-size: 10px;
-        margin: 2px;
     }
     .img-upload{
         margin: 5px;
-
         img{
             width: 50px;
             height: 50px;
-        }
-        input{
-            font-size: 8px;
-        }
-        .MuiButton-outlined{
-            padding: 5px;
-        }
-        .MuiButton-outlined.Mui-disabled{
-            padding: 5px;
-        }
-        .MuiButton-label{
-            font-size: 10px;
-        }
-    }
-    .setup-form{
-        .MuiFormControl-root{
-            .MuiFormLabel-root{
-                font-size: 10px;
-            }
         }
     }
 }

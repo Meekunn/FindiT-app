@@ -24,6 +24,11 @@ interface ILecturerBasic {
     office: string;
 }
 
+interface ILecturers extends ILecturerBasic{
+    bio:string;
+    photoURL: any;
+}
+
 interface ILecturersAuth{
     email: string;
     password: string;
