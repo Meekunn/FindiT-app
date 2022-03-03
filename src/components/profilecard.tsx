@@ -1,9 +1,7 @@
-import React from 'react'
-import Badge from "@material-ui/core/Badge"
-import Avatar from "@material-ui/core/Avatar"
+import { Badge, Avatar} from "@material-ui/core"
 import '../style/component/profilecard.scss'
 
-const ProfileCard = () => {
+const ProfileCard = ({...lecturer}) => {
   return (
     <div className="card-wrapper">
       <div className="card-contain">
@@ -20,15 +18,14 @@ const ProfileCard = () => {
             src="../images/profile-avatar.jpg"
             ></Avatar>
           </Badge>
-          <h1>Name</h1>
-          <p>Department</p>
+          <h1>Name: {lecturer.fullname}</h1>
+          <p>Department: {lecturer.department}</p>
         </div>
         <div className="other-info">
-          <p>Email</p>
-          <p>Office</p>
-          <p>Location</p>
-          <p>Phone Number</p>
-          <p>Bio</p>
+          <p>Email: {lecturer.email}</p>
+          <p>Office: {lecturer.office}</p>
+          <p>Location: {lecturer.location}</p>
+          <p>Phone: {lecturer.phone}</p>
         </div>
       </div>
     </div>

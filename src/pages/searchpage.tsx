@@ -1,10 +1,9 @@
-import React from 'react'
 import Search from '../components/search'
-import ProfileCard from '../components/profilecard'
 import '../style/searchpage.scss'
+//import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 const SearchPage = () => {
-    return(
+    return (
         <div className='home-wrapper'>
             <div className='home-contain'>
                 <div className='side-bar'>
@@ -12,13 +11,34 @@ const SearchPage = () => {
                 </div>
                 <div className='contents'>
                     <Search />
-                    <div className='profile-cards'>
-                        <ProfileCard />
-                    </div>
                 </div>
             </div>
+
         </div>
-    )
+
+);
 }
 
 export default SearchPage
+
+
+{/* <ReactSearchAutocomplete
+    
+    styling={{
+        height: "34px",
+        border: "1px solid darkgreen",
+        borderRadius: "4px",
+        backgroundColor: "white",
+        boxShadow: "none",
+        hoverBackgroundColor: "lightgreen",
+        color: "darkgreen",
+        fontSize: "12px",
+        fontFamily: "Courier",
+        iconColor: "green",
+        lineColor: "lightgreen",
+        placeholderColor: "darkgreen",
+        clearIconMargin: "3px 8px 0 0",
+        zIndex: 4 }} 
+        
+autoFocus
+/>             */}

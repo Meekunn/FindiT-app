@@ -67,7 +67,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
       
         await uploadBytes(photoRef, photo)
         .then(() => {
-            getDownloadURL(photoRef).then((photoURL) => {
+            getDownloadURL(photoRef).then(() => {
                 if(currentUser){
                     setPhotoURL(currentUser.photoURL)
                 }

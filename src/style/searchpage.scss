@@ -35,3 +35,12 @@ h2{
     height: 100vh;
     background-color: $background;
 }
+
+.Search{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    top:  0px;
+    left: 0px
+}
