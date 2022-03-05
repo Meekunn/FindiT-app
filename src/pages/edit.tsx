@@ -7,47 +7,49 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { TextField, Button, MenuItem } from '@material-ui/core'
 import '../style/setup.scss'
 
+const titles = [
+    {
+        value: "Mrs.",
+        label: "Mrs."
+    },{
+        value: "Mr.",
+        label: "Mr."
+    },{
+        value: "Miss",
+        label: "Miss"
+    },{
+        value: "Dr.",
+        label: "Dr."
+    },{
+        value: "Prof.",
+        label: "Prof."
+    },{
+        value: "Engr.",
+        label: "Engr."
+    }
+]
+
+const departments = [
+    {
+        value: "Information and Communication Technology",
+        label: "ICT"
+    },
+    {
+        value: "Electrical and Electronics Engineering",
+        label: "EEE"
+    }
+]
+
 const Edit = () => {
 
     const history = useHistory()
-    const currentUser = auth.currentUser
-
-    const titles = [
-        {
-            value: "Mrs.",
-            label: "Mrs."
-        },{
-            value: "Mr.",
-            label: "Mr."
-        },{
-            value: "Dr.",
-            label: "Dr."
-        },{
-            value: "Prof.",
-            label: "Prof."
-        },{
-            value: "Engr.",
-            label: "Engr."
-        }
-    ]
-
-    const departments = [
-        {
-            value: "Informationa dand Communication Technology",
-            label: "ICT"
-        },
-        {
-            value: "Electrical and Electronics Engineering",
-            label: "EEE"
-        }
-    ]
+    const user = auth.currentUser
 
     const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [bio, setBio] = useState<string>("")
     const [photo, setPhoto] = useState<any>()
-    const [preview, setPreview] = useState<any>()
-    const [photoURL, setPhotoURL] = useState<any>()
+    const [photoURL, setPhotoURL] = useState<string>()
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
@@ -57,15 +59,23 @@ const Edit = () => {
     useEffect(() => {
 
         const state = history.location.state as  ILecturers | undefined
-        setName(state?.fullname || '')
+        setName(state?.name || '')
         setPhone(state?.phone|| '')
         setTitle(state?.title|| '')
         setDepartment(state?.department || '')
         setLocation(state?.location || '')
         setOffice(state?.office || '')
         setBio(state?.bio || '')
-        setPhotoURL(state?.photoURL || "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
+        setPhotoURL(state?.photoURL || '')
     }, [] )
+
+    const handleTitle = (e:ChangeEvent<HTMLInputElement>) =>{
+        setTitle(e.target.value)
+    }
+
+    const handleDepartment = (e:ChangeEvent<HTMLInputElement>) => {
+        setDepartment(e.target.value)
+    }
 
     const handlePhoto = (e:any) => {
         if(e.target.files[0])
@@ -73,12 +83,12 @@ const Edit = () => {
             setPhoto(e.target.files[0])
     }
 
-    const uploadPicture = async (photo: any, id: any, setUploading: any) => {
+    const uploadPicture = async (file: any, id: any, setUploading: any) => {
         const photoRef = ref(storage, "/lecturer" + id.uid + ".png")
       
         setUploading(true)
       
-        await uploadBytes(photoRef, photo)
+        await uploadBytes(photoRef, file)
         .then(() => {
             getDownloadURL(photoRef).then((photoURL) => {
                 setPhotoURL(photoURL)
@@ -95,16 +105,9 @@ const Edit = () => {
     }
 
     const submitUpload = () => {
-        uploadPicture(photoURL,currentUser,setUploading)
+        uploadPicture(photo,user,setUploading)
     }
 
-    const handleTitle = (e:ChangeEvent<HTMLInputElement>) =>{
-        setTitle(e.target.value)
-    }
-
-    const handleDepartment = (e:ChangeEvent<HTMLInputElement>) => {
-        setDepartment(e.target.value)
-    }
 
     const handleEdit = async () => {
         const user = auth.currentUser
@@ -118,9 +121,10 @@ const Edit = () => {
                 department,
                 location,
                 office,
-                bio
+                bio,
+                photoURL
             }
-            const setDocRef = await setDoc(docRef, payload, {merge:true})
+            await setDoc(docRef, payload, {merge:true})
         }
         history.push('/dashboard')
     }
@@ -192,6 +196,14 @@ const Edit = () => {
                     placeholder="38, 1st Floor"
                     value={office}
                     onChange={(e) =>setOffice(e.target.value)}
+                    />
+                    <TextField
+                    id="outlined-uncontrolled"
+                    label="Bio"
+                    placeholder=""
+                    multiline
+                    value={bio}
+                    onChange={(e) =>setBio(e.target.value)}
                     />
                     <div className="status-btns">
                         <Button variant="outlined" className='active'>Active</Button>

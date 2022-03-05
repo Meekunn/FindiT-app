@@ -48,7 +48,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         }
     ]
 
-    const [fullname, setFullname] = useState<string>("")
+    const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
@@ -106,7 +106,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
             const uid = user.uid
             const docRef = doc(db, "lecturers", uid)
             const payload = {
-                fullname,
+                name,
                 title,
                 phone,
                 department,
@@ -133,8 +133,8 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     id="outlined-basic"
                     label="Full Name"
                     placeholder=""
-                    value={fullname}
-                    onChange={(e) =>setFullname(e.target.value)}
+                    value={name}
+                    onChange={(e) =>setName(e.target.value)}
                     />
                     <TextField
                     id="outlined-basic"

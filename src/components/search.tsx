@@ -5,52 +5,55 @@ import ProfileCard from './profilecard'
 import '../style/component/search.scss'
 import '../style/searchpage.scss'
 
+const departments = [
+    {
+        value: "Information and Communication Technology",
+        label: "ICT"
+    },
+    {
+        value: "Electrical and Electronics Engineering",
+        label: "EEE"
+    }
+]
+
 const Search = () => {
 
-    const departments = [
-        {
-            value: "Informationa dand Communication Technology",
-            label: "ICT"
-        },
-        {
-            value: "Electrical and Electronics Engineering",
-            label: "EEE"
-        }
-    ]
 
     const [department, setDepartment] = useState<string>("")
     const [searchName, setSearchName] = useState<string>("")
-    const [lecturerData, setLecturerData] = useState<any>([])
+    const [lecturerData, setLecturerData] = useState<ILecturers[]>([])
     const [searchDept, setSearchDept] = useState<string>("")
-    const [output, setOutput] = useState<any>([])
+    const [output, setOutput] = useState<ILecturers[]>([])
     
 
     useEffect(() => {
+
+        const fetchData = async () => {
+            const res = await axios.get("https://us-central1-findit-4cd7f.cloudfunctions.net/app/lecturers")
+            const data = res.data
+            setLecturerData(data)
+            setOutput(data)
+        }
         fetchData()
-        console.log(lecturerData)
     }, [])
 
-    const fetchData = async () => {
-        const res = await axios.get("https://us-central1-findit-4cd7f.cloudfunctions.net/app/lecturers")
-        const data = res.data
-        setLecturerData(data)
-        console.log(data)
-    }
-
+    useEffect(() => {
+        const newOutput = output.filter((lecturer) => lecturer.name.includes(searchName.toLowerCase()))
+        setOutput(newOutput)
+    },[searchName])
     const handleDept = (val:string) => {
         setSearchDept(val)
     }
 
-    const handleName = (val: string) => {
-        setSearchName(val)
-        if(searchName === ""){
-            return setOutput([])
-        }
-        const filteredData = lecturerData.filter((data:any) => {
-            return Object.values(data).join('').toLowerCase().includes(searchName.toLowerCase())
-        })
-        setOutput(filteredData)
-    }
+    // const handleName = (val: string) => {
+    //     if(searchName === ""){
+    //         return setOutput([])
+    //     }
+    //     const filteredData = lecturerData.filter((data:any) => {
+    //         return Object.values(data).join('').toLowerCase().includes(searchName.toLowerCase())
+    //     })
+    //     setOutput(filteredData)
+    // }
 
     return(
         <div className='nav-wrap'>
@@ -76,20 +79,20 @@ const Search = () => {
                 label='Search by name' 
                 variant='outlined'
                 value={searchName}
-                onChange={(e) => {setSearchName(e.target.value); handleName(e.target.value)}}>
+                onChange={(e) => setSearchName(e.target.value)}>
                 </TextField>
                 </div>
                 <div className='profile-cards'>
                     {searchName.length > 0 ? 
-                        (output.map((lecturer:any, id:any) => {
+                        (output.map((lecturer) => {
                             return(
-                                <ProfileCard key={lecturer.id} fullname={lecturer.fullname} title={lecturer.title} phone={lecturer.phone}
+                                <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
                                 email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department} />
                             )
                         })) :  (
-                        lecturerData.map((lecturer:any, id:any) => {
+                        lecturerData.map((lecturer) => {
                             return(
-                                <ProfileCard key={lecturer.id} fullname={lecturer.fullname} title={lecturer.title} phone={lecturer.phone}
+                                <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
                                 email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department} />
                             )
                         }))

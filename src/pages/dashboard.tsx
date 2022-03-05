@@ -6,6 +6,7 @@ import { FC, useState, useEffect} from 'react'
 import { auth, db } from '../config/firebase'
 import { TextField, Button } from '@material-ui/core'
 import '../style/dashboard.scss'
+import { System } from 'typescript'
 
 const Dashboard:FC<ILecturers> = props => {
 
@@ -15,7 +16,7 @@ const Dashboard:FC<ILecturers> = props => {
     const [title, setTitle] = useState<string>("")
     const [bio, setBio] = useState<string>("")
     const [email, setEmail] = useState<any>()
-    const [photo, setPhoto] = useState<any>()
+    const [photoURL, setPhotoURL] = useState<string>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
@@ -32,7 +33,6 @@ const Dashboard:FC<ILecturers> = props => {
                 const uid = user.uid
                 getInfo(uid)
             } else {
-                return
                 console.log("no user found!")
             }
         })
@@ -45,29 +45,29 @@ const Dashboard:FC<ILecturers> = props => {
         const user = auth.currentUser
         if (user !== null) {
             setEmail(user.email)
-            setPhoto(user.photoURL)
             if(docData){
                 setDash(docData)
-                setName(docData.fullname)
+                setName(docData.name)
                 setTitle(docData.title)
                 setPhone(docData.phone)
                 setOffice(docData.office)
                 setDepartment(docData.department)
                 setLocation(docData.location)
                 setBio(docData.bio)
+                setPhotoURL(docData.photoURL)
+            }else{
+                console.log("no data found")
+                return
             }
-        }else{
-            console.log("no data found")
-            return
         }  
     }
 
     const logOut = () => {
         signOut(auth)
-        .then((result: any) => {
+        .then(() => {
             history.replace('/signin')
         })
-        .catch((error: any) => {
+        .catch(() => {
             console.log("Can't logout")
         })
     }
@@ -77,7 +77,7 @@ const Dashboard:FC<ILecturers> = props => {
             <div className='dash-contain'>
                 <h1>Dashboard</h1>
                 <div className='img-upload'>
-                    <img alt='User-Image' src={photo} />
+                    <img alt='User' src={photoURL} />
                     <Button variant="outlined"><Link to={{
                                 pathname: "/edit",
                                 state: dash
@@ -86,43 +86,48 @@ const Dashboard:FC<ILecturers> = props => {
                 <div className='dash-form'>
                     <TextField
                     InputProps={{
-                        readOnly: true,
+                        readOnly: true
                     }}
-                    id="outlined-disabled"
+                    InputLabelProps={{ shrink: true }}
+                    id="outlined-uncontrolled"
                     label="Full Name"
-                    defaultValue={name}
+                    value={name}
                     />
                     <TextField
                     InputProps={{
                         readOnly: true,
                     }}
+                    InputLabelProps={{ shrink: true }}
                     id="outlined-uncontrolled"
                     label="Title"
-                    defaultValue={title}
+                    value={title}
                     />
                     <TextField
                     InputProps={{
                         readOnly: true,
                     }}
-                    id="outlined-disabled"
+                    InputLabelProps={{ shrink: true }}
+                    id="outlined-uncontrolled"
                     label="Email"
-                    defaultValue={email}
+                    value={email}
                     />
                     <TextField
                     id="outlined-uncontrolled"
                     InputProps={{
                         readOnly: true,
                     }}
+                    InputLabelProps={{ shrink: true }}
                     label="Phone Number"
-                    defaultValue={phone}
+                    value={phone}
                     />
                     <TextField
                     id="outlined-select-currency"
                     InputProps={{
                         readOnly: true,
                     }}
+                    InputLabelProps={{ shrink: true }}
                     label="Department"
-                    defaultValue={department}
+                    value={department}
                     />
                     <TextField
                     id="outlined-uncontrolled"
@@ -130,23 +135,27 @@ const Dashboard:FC<ILecturers> = props => {
                     InputProps={{
                         readOnly: true,
                     }}
-                    defaultValue={location}
+                    InputLabelProps={{ shrink: true }}
+                    value={location}
                     />
                     <TextField
                     id="outlined-uncontrolled"
                     InputProps={{
                         readOnly: true,
                     }}
+                    InputLabelProps={{ shrink: true }}
                     label="Office"
-                    defaultValue={office}
+                    value={office}
                     />
                     <TextField
                     id="outlined-uncontrolled"
                     InputProps={{
                         readOnly: true,
                     }}
+                    InputLabelProps={{ shrink: true }}
+                    multiline
                     label="Bio"
-                    defaultValue={bio}
+                    value={bio}
                     />
                     <Button variant="contained"><Link to='/editpassword'>Change Password</Link></Button>
                     <Button variant="contained" onClick={logOut}>SIGNOUT</Button>

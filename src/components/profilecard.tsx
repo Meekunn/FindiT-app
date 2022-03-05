@@ -1,7 +1,9 @@
 import { Badge, Avatar} from "@material-ui/core"
 import '../style/component/profilecard.scss'
+import { auth } from '../config/firebase'
 
 const ProfileCard = ({...lecturer}) => {
+
   return (
     <div className="card-wrapper">
       <div className="card-contain">
@@ -15,10 +17,10 @@ const ProfileCard = ({...lecturer}) => {
             <Avatar
             style={{width: 55, height: 55}}
             alt="User"
-            src="../images/profile-avatar.jpg"
+            src={lecturer.photoURL}
             ></Avatar>
           </Badge>
-          <h1>Name: {lecturer.fullname}</h1>
+          <h1>Name: {lecturer.title} {lecturer.name}</h1>
           <p>Department: {lecturer.department}</p>
         </div>
         <div className="other-info">

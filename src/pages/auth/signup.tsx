@@ -22,7 +22,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
         const payload = {
             email
         }
-        const setDocRef = await setDoc(docRef, payload)
+        await setDoc(docRef, payload)
     }
 
     const verifyEmail = (user: any) => {
@@ -32,8 +32,9 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                 //Verification sent
                 alert("Check your email")
             })
-            .catch((error:any) =>{
+            .catch(() =>{
                 //Error
+                setError("An Error occured")
                 alert("An Error occured")
             })
         }
@@ -56,7 +57,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                 verifyEmail(user)
                 await handleNew(userCredential.user.uid)
                 if(user.emailVerified){
-                    history.push('/home')
+                    history.push('/setup')
                 }
             }
         })
@@ -80,6 +81,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
         setEmail("")
         setPassword("")
         setConfirm("")
+        setSignup(true)
     }
 
     return(
@@ -116,7 +118,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                         value={confirm}
                         onChange={(e)=>setConfirm(e.target.value)}
                         />
-                        <Button variant="contained" onClick={signUp} >GET STARTED</Button>
+                        <Button variant="contained" disabled={signup} onClick={signUp} >GET STARTED</Button>
                     </div>
                     <div className='signup-footer'>
                         <p>Already have an account?</p>

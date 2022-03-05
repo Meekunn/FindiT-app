@@ -16,20 +16,23 @@ interface IRoutes {
 }
 
 interface ILecturerBasic {
-    fullname: string;
+    name: string;
     title: string;
     phone: string;
     department: string;
     location: string;
     office: string;
+    email: string;
+    id: string;
 }
 
 interface ILecturers extends ILecturerBasic{
     bio:string;
-    photoURL: any;
+    photoURL: string;
 }
 
 interface ILecturersAuth{
+    id: string;
     email: string;
     password: string;
 }

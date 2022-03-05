@@ -1,6 +1,5 @@
 import Search from '../components/search'
 import '../style/searchpage.scss'
-//import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 const SearchPage = () => {
     return (
