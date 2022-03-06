@@ -5,18 +5,19 @@ import { signOut } from 'firebase/auth'
 import { FC, useState, useEffect} from 'react'
 import { auth, db } from '../config/firebase'
 import { TextField, Button } from '@material-ui/core'
+import avatar from '../images/user.png'
 import '../style/dashboard.scss'
-import { System } from 'typescript'
 
 const Dashboard:FC<ILecturers> = props => {
 
     const history = useHistory()
+    const img = require('../images/user.png')
 
     const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [bio, setBio] = useState<string>("")
     const [email, setEmail] = useState<any>()
-    const [photoURL, setPhotoURL] = useState<string>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
+    const [photoURL, setPhotoURL] = useState<any>({avatar})
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")

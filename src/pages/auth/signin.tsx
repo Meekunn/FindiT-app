@@ -9,6 +9,7 @@ import '../../style/signin.scss'
 const SignIn:FC<IPageProps> = (props) => {
 
     const history = useHistory()
+    const user = auth.currentUser
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -22,7 +23,11 @@ const SignIn:FC<IPageProps> = (props) => {
         }
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: any) => {
-            history.push('/dashboard')
+            if(user?.emailVerified){
+                history.push('/dashboard')
+            } else{
+                alert("Verify your email")
+            }
         })
         .catch((error:any) => {
             setError(error.message)
