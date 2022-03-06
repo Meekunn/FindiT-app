@@ -57,7 +57,7 @@ const Edit = () => {
     useEffect(() => {
 
         const state = history.location.state as  ILecturers | undefined
-        setName(state?.fullname || '')
+        setName(state?.name || '')
         setPhone(state?.phone|| '')
         setTitle(state?.title|| '')
         setDepartment(state?.department || '')

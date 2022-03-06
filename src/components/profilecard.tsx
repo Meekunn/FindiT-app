@@ -18,7 +18,7 @@ const ProfileCard = ({...lecturer}) => {
             src="../images/profile-avatar.jpg"
             ></Avatar>
           </Badge>
-          <h1>Name: {lecturer.fullname}</h1>
+          <h1>Name: {lecturer.name}</h1>
           <p>Department: {lecturer.department}</p>
         </div>
         <div className="other-info">

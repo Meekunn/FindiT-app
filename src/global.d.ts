@@ -16,7 +16,7 @@ interface IRoutes {
 }
 
 interface ILecturerBasic {
-    fullname: string;
+    name: string;
     title: string;
     phone: string;
     department: string;
