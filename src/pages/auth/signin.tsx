@@ -23,11 +23,13 @@ const SignIn:FC<IPageProps> = (props) => {
         }
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential: any) => {
-            if(user?.emailVerified){
-                history.push('/dashboard')
-            } else{
-                alert("Verify your email")
-            }
+            if(user){
+                if(user.emailVerified){
+                    history.push('/dashboard')
+                }else{
+                    alert("Verify your email")
+                }
+            } 
         })
         .catch((error:any) => {
             setError(error.message)

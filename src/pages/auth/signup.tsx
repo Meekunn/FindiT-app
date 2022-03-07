@@ -56,10 +56,8 @@ const SignUp:FC<ILecturersAuth> = (props) => {
             if(user){
                 verifyEmail(user)
                 await handleNew(userCredential.user.uid)
-                if(user.emailVerified){
-                    history.push('/setup')
-                }
             }
+            history.replace('/setup')
         })
         .catch((error:any) => {
 

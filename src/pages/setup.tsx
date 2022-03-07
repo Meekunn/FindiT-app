@@ -7,70 +7,68 @@ import { ref, getDownloadURL, uploadBytes  } from 'firebase/storage'
 import { Button, TextField, MenuItem, Avatar } from '@material-ui/core'
 import '../style/setup.scss'
 
+const titles = [
+    {
+        value: "Mrs.",
+        label: "Mrs."
+    },{
+        value: "Mr.",
+        label: "Mr."
+    },{
+        value: "Dr.",
+        label: "Dr."
+    },{
+        value: "Prof.",
+        label: "Prof."
+    },{
+        value: "Engr.",
+        label: "Engr."
+    }
+]
+
+const departments = [
+    {
+        value: "Information and Communication Technology",
+        label: "ICT"
+    },
+    {
+        value: "Electrical and Electronics Engineering",
+        label: "EEE"
+    }
+]
+
 const ProfileSetup:FC<ILecturerBasic> = props => {
 
     const history = useHistory()
-    const currentUser = auth.currentUser
+    const user = auth.currentUser
 
-    // useEffect(() => {
-    //     if(currentUser && currentUser.photoURL){
-    //         setPhotoURL(currentUser.photoURL)
-    //     }
-    // }, [currentUser])
-
-    const titles = [
-        {
-            value: "Mrs.",
-            label: "Mrs."
-        },{
-            value: "Mr.",
-            label: "Mr."
-        },{
-            value: "Dr.",
-            label: "Dr."
-        },{
-            value: "Prof.",
-            label: "Prof."
-        },{
-            value: "Engr.",
-            label: "Engr."
-        }
-    ]
-
-    const departments = [
-        {
-            value: "Information and Communication Technology",
-            label: "ICT"
-        },
-        {
-            value: "Electrical and Electronics Engineering",
-            label: "EEE"
-        }
-    ]
 
     const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
+    const [photo, setPhoto] = useState<any>()
+    const [photoURL, setPhotoURL] = useState<string>()
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
-    const [location, setLocation] = useState<string>("")
     const [office, setOffice] = useState<string>("")
-    const [photo, setPhoto] = useState<any>(null)
-    const [photoURL, setPhotoURL] = useState<any>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
+    const [location, setLocation] = useState<string>("")
     const [uploading, setUploading] = useState<boolean>(false)
     const [error, setError] = useState<string>("")
     const [setup, setSetup] = useState<boolean>(false)
 
-    const uploadPicture = async (photo: any, id: any, setUploading: any) => {
+    const handlePhoto = (e:any) => {
+        if(e.target.files[0])
+            setPhoto(e.target.files[0])
+    }
+
+    const uploadPicture = async (file: any, id: any, setUploading: any) => {
         const photoRef = ref(storage, "/lecturer" + id.uid + ".png")
       
         setUploading(true)
       
-        await uploadBytes(photoRef, photo)
+        await uploadBytes(photoRef, file)
         .then(() => {
-            getDownloadURL(photoRef).then(() => {
-                if(currentUser){
-                    setPhotoURL(currentUser.photoURL)
-                }
+            getDownloadURL(photoRef).then((photoURL) => {
+                setPhotoURL(photoURL)
             }).catch((error:any) => {
                 console.log(error.message, "error getting photourl")
             })
@@ -84,13 +82,9 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
     }
 
     const submitUpload = () => {
-        uploadPicture(photoURL,currentUser,setUploading)
+        uploadPicture(photo,user,setUploading)
     }
-    const handlePhoto = (e:any) => {
-        if(e.target.files[0])
-            setPhotoURL(window.URL.createObjectURL(e.target.files[0]))
-            setPhoto(e.target.files[0])
-    }
+    
 
     const handleTitle = (e:ChangeEvent<HTMLInputElement>) =>{
         setTitle(e.target.value)
@@ -111,9 +105,10 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                 phone,
                 department,
                 location,
-                office
+                office,
+                photoURL
             }
-            const setDocRef = await setDoc(docRef, payload, {merge:true})
+            await setDoc(docRef, payload, {merge:true})
         }
         history.replace('/dashboard')
     }
@@ -124,7 +119,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                 <h1>Profile Setup</h1>
                 <p>Dedicated to helping you navigate your relation with lecturers</p>
                 <div className='img-upload'>
-                    <img src={photoURL} alt='User-Image' />
+                    <img src={photoURL} alt='User' />
                     <input type='file' onChange={handlePhoto}/>
                     <Button variant="outlined" onClick={submitUpload} disabled={uploading || !photo} >Setup Picture</Button>
                 </div>
@@ -137,18 +132,18 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     onChange={(e) =>setName(e.target.value)}
                     />
                     <TextField
-                    id="outlined-basic"
+                    id="outlined-uncontrolled"
                     select
                     label="Title"
                     placeholder=""
                     value={title}
                     onChange={handleTitle}
                     >
-                        {titles.map((opt: any) => {
-                            <MenuItem key={opt.value} value={opt.value}>
-                                {opt.label}
+                        {titles.map((option: any) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
                             </MenuItem>
-                        })}
+                        ))}
                     </TextField>
                     <TextField
                     id="outlined-basic"

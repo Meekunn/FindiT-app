@@ -79,7 +79,6 @@ const Edit = () => {
 
     const handlePhoto = (e:any) => {
         if(e.target.files[0])
-            //window.URL.createObjectURL(e.target.files[0])
             setPhoto(e.target.files[0])
     }
 

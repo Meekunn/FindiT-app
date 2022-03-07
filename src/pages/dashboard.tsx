@@ -17,7 +17,7 @@ const Dashboard:FC<ILecturers> = props => {
     const [title, setTitle] = useState<string>("")
     const [bio, setBio] = useState<string>("")
     const [email, setEmail] = useState<any>()
-    const [photoURL, setPhotoURL] = useState<any>({avatar})
+    const [photoURL, setPhotoURL] = useState<any>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
