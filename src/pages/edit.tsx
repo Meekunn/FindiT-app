@@ -254,11 +254,6 @@ const Edit = () => {
                             </MenuItem>
                         ))}
                     </TextField>
-                    {/* <div className="status-btns">
-                        <Button variant="outlined" className='active' onClick={statusActive} >Active</Button>
-                        <Button variant="outlined" className='busy' onClick={statusBusy} >Busy</Button>
-                        <Button variant="outlined" className='absent' onClick={statusAbsent} >Absent</Button>
-                    </div> */}
                     <Button variant="contained" style={{marginTop: 2}} onClick={handleEdit}>DONE</Button>
                 </div>
             </div>

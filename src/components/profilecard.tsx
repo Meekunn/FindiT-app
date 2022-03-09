@@ -1,9 +1,6 @@
-import { useState } from 'react'
 import '../style/component/profilecard.scss'
 
 const ProfileCard = ({...lecturer}) => {
-
-  //const [status, setStatus] = useState<string>('')
 
   return (
     <div className="card-wrapper" style={lecturer.status === 'Available'? {border: '3px solid #16e716'} : {}}>
@@ -27,32 +24,3 @@ const ProfileCard = ({...lecturer}) => {
 };
 
 export default ProfileCard;
-
-
-// const StyledBadge = styled(Badge)<BadgeProps> ({
-//   "& .MuiBadge-badge": {
-//     backgroundColor: "#44b700",
-//     color: "#44b700",
-//     "&::after": {
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       width: "100%",
-//       height: "100%",
-//       borderRadius: "50%",
-//       animation: "ripple 1.2s infinite ease-in-out",
-//       border: "1px solid currentColor",
-//       content: '""'
-//     }
-//   },
-//   "@keyframes ripple": {
-//     "0%": {
-//       transform: "scale(.8)",
-//       opacity: 1
-//     },
-//     "100%": {
-//       transform: "scale(2.4)",
-//       opacity: 0
-//     },
-//   },
-// });

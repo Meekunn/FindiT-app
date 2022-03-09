@@ -24,7 +24,6 @@ const Dashboard:FC<ILecturers> = props => {
     const [dash, setDash] = useState<any>({})
 
     useEffect(() => {
-        //const ac = new AbortController()
         userOnline()
     },[])
 

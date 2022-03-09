@@ -13,7 +13,6 @@ const Search = () => {
     const [searchDept, setSearchDept] = useState<string>("")
     const [output, setOutput] = useState<any>([])
     const trimText = useCallback((text: string) => text.replace(/\s+/g,'').toLowerCase(),[])
-    //const names:any[] = []
 
     useEffect(() => {
         fetchData()
@@ -56,11 +55,6 @@ const Search = () => {
                 value={searchDept}
                 onChange={(e) => {setSearchDept(e.target.value); handleDept(e.target.value)}}
                 >
-                {/* {departments.map((option: any) => (
-                    <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                    </MenuItem>
-                ))} */}
                 </TextField>
                 <TextField 
                 id='name-search' 
@@ -94,14 +88,3 @@ const Search = () => {
 }
 
 export default Search
-
-// const getNames = async () => {
-    //     const allData: ILecturers[] = []
-    //     const querysnapshot = await getDocs(collection(db, 'lecturers'))
-    //     querysnapshot.forEach((doc:any) => allData.push(doc.data()))
-    //     allData.map((name: any, id: any) => {
-    //         names.push(name.name)
-    //     })
-    //     setNameOutput(names)
-    //     console.log(names, nameOutput)
-    // }
