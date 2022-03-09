@@ -24,11 +24,12 @@ const Dashboard:FC<ILecturers> = props => {
     const [dash, setDash] = useState<any>({})
 
     useEffect(() => {
+        //const ac = new AbortController()
         userOnline()
     },[])
 
     const userOnline = () => {
-        onAuthStateChanged(auth, async (user: any) => {
+        onAuthStateChanged(auth, (user: any) => {
             if(user){
                 const uid = user.uid
                 getInfo(uid)
@@ -162,7 +163,7 @@ const Dashboard:FC<ILecturers> = props => {
                     }}
                     InputLabelProps={{ shrink: true }}
                     multiline
-                    label="You are currently"
+                    label="Status: You are currently"
                     value={status}
                     />
                     <Button variant="contained"><Link to='/editpassword'>Change Password</Link></Button>

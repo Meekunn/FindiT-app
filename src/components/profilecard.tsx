@@ -1,25 +1,20 @@
-//import { FC } from 'react'
-import { Badge } from "@material-ui/core"
+import { useState } from 'react'
 import '../style/component/profilecard.scss'
 
 const ProfileCard = ({...lecturer}) => {
 
+  //const [status, setStatus] = useState<string>('')
+
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper" style={lecturer.status === 'Available'? {border: '3px solid #16e716'} : {}}>
       <div className="card-contain">
         <div className="main-info">
-          <Badge
-            overlap="circular"
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            badgeContent = ""
-            color="primary"
-          >
-            <img alt="user"  src={lecturer.photoURL} />
-          </Badge>
+          <img alt="user"  src={lecturer.photoURL} />
           <h1>{lecturer.title} {lecturer.name}</h1>
           <p>{lecturer.department}</p>
         </div>
         <div className="other-info">
+          <p>Availability Status: {lecturer.status}</p>
           <p>Email: {lecturer.email}</p>
           <p>Office: {lecturer.office}</p>
           <p>Location: {lecturer.location}</p>

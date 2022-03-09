@@ -76,14 +76,14 @@ const Search = () => {
                             return(
                                 <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
                                 email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department}
-                                photoURL={lecturer.photoURL} bio={lecturer.bio} />
+                                photoURL={lecturer.photoURL} bio={lecturer.bio} status={lecturer.status} />
                             )
                         })) :  (
                         lecturerData.map((lecturer:any) => {
                             return(
                                 <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
                                 email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department}
-                                photoURL={lecturer.photoURL} bio={lecturer.bio} />
+                                photoURL={lecturer.photoURL} bio={lecturer.bio} status={lecturer.status} />
                             )
                         }))
                     }

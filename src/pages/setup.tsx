@@ -41,6 +41,19 @@ const departments = [
     }
 ]
 
+const updateStatus = [
+    {
+        value: "Available",
+        label: "Available"
+    },{
+        value: "Busy",
+        label: "Busy"
+    },{
+        value: "Unavailable",
+        label: "Unavailable"
+    }
+]
+
 const ProfileSetup:FC<ILecturerBasic> = props => {
 
     const history = useHistory()
@@ -97,6 +110,10 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         setDepartment(e.target.value)
     }
 
+    const handleStatus= (e:ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.target.value)
+    }
+
     const handleSetup = async () => {
         const user = auth.currentUser
         if(user !== null){
@@ -118,31 +135,18 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         }
     }
 
-    const statusActive = () => {
-        setStatus("active")
-        console.log("user is active")
-    }
-    const statusBusy = () => {
-        setStatus("busy")
-        console.log("user is busy")
-    }
-    const statusAbsent = () => {
-        setStatus("absent")
-        console.log("user is absent")
-    }
-
     return(
         <div className='setup-wrap'>
             <div className='setup-contain'>
                 <h1>Profile Setup</h1>
                 <p>Dedicated to helping you navigate your relation with lecturers</p>
-                <p>Ensure you fill required field to proceed</p>
                 <div className='img-upload'>
                     <img src={photoURL} alt='User' />
-                    <input type='file' required onChange={handlePhoto}/>
+                    <input type='file' onChange={handlePhoto}/>
                     <Button variant="outlined" onClick={submitUpload} disabled={uploading || !photo} >Setup Picture</Button>
                 </div>
                 <div className='setup-form'>
+                    <p>Ensure you fill required field to proceed</p>
                     <TextField
                     id="outlined-basic"
                     label="Full Name"
@@ -212,12 +216,21 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     value={office}
                     onChange={(e) =>setOffice(e.target.value)}
                     />
-                    <div className="status-btns">
-                        <Button variant="outlined" className='active' onClick={statusActive} >Active</Button>
-                        <Button variant="outlined" className='busy' onClick={statusBusy} >Busy</Button>
-                        <Button variant="outlined" className='absent' onClick={statusAbsent} >Absent</Button>
-                    </div>
-                    <Button variant="contained" onClick={handleSetup}>DONE</Button>
+                    <TextField
+                    id="outlined-uncontrolled"
+                    select
+                    label="Status"
+                    placeholder=""
+                    value={status}
+                    onChange={handleStatus}
+                    >
+                        {updateStatus.map((option: any) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    <Button variant="contained" style={{marginTop: 2}} onClick={handleSetup}>DONE</Button>
                 </div>
             </div>
         </div>

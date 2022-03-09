@@ -44,6 +44,19 @@ const departments = [
     }
 ]
 
+const updateStatus = [
+    {
+        value: "Available",
+        label: "Available"
+    },{
+        value: "Busy",
+        label: "Busy"
+    },{
+        value: "Unavailable",
+        label: "Unavailable"
+    }
+]
+
 const Edit = () => {
 
     const history = useHistory()
@@ -58,6 +71,7 @@ const Edit = () => {
     const [department, setDepartment] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [office, setOffice] = useState<string>("")
+    const [status, setStatus] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [uploading, setUploading] = useState<boolean>(false)
 
@@ -72,6 +86,7 @@ const Edit = () => {
         setLocation(state?.location || '')
         setOffice(state?.office || '')
         setBio(state?.bio || '')
+        setStatus(state?.status || '')
         setPhotoURL(state?.photoURL || '')
     }, [] )
 
@@ -81,6 +96,10 @@ const Edit = () => {
 
     const handleDepartment = (e:ChangeEvent<HTMLInputElement>) => {
         setDepartment(e.target.value)
+    }
+
+    const handleStatus= (e:ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.target.value)
     }
 
     const handlePhoto = (e:any) => {
@@ -128,7 +147,8 @@ const Edit = () => {
                 office,
                 bio,
                 email,
-                photoURL
+                photoURL,
+                status
             }
             await setDoc(docRef, payload, {merge:true})
         }
@@ -220,12 +240,26 @@ const Edit = () => {
                     value={bio}
                     onChange={(e) =>setBio(e.target.value)}
                     />
-                    <div className="status-btns">
-                        <Button variant="outlined" className='active'>Active</Button>
-                        <Button variant="outlined" className='busy'>Busy</Button>
-                        <Button variant="outlined" className='absent'>Absent</Button>
-                    </div>
-                    <Button variant="contained" onClick={handleEdit}>DONE</Button>
+                    <TextField
+                    id="outlined-uncontrolled"
+                    select
+                    label="Status"
+                    placeholder=""
+                    value={status}
+                    onChange={handleStatus}
+                    >
+                        {updateStatus.map((option: any) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                    {/* <div className="status-btns">
+                        <Button variant="outlined" className='active' onClick={statusActive} >Active</Button>
+                        <Button variant="outlined" className='busy' onClick={statusBusy} >Busy</Button>
+                        <Button variant="outlined" className='absent' onClick={statusAbsent} >Absent</Button>
+                    </div> */}
+                    <Button variant="contained" style={{marginTop: 2}} onClick={handleEdit}>DONE</Button>
                 </div>
             </div>
         </div>
