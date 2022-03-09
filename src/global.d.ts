@@ -24,6 +24,7 @@ interface ILecturerBasic {
     office: string;
     email: string;
     id: string;
+    status: string;
 }
 
 interface ILecturers extends ILecturerBasic{
@@ -36,3 +37,8 @@ interface ILecturersAuth{
     email: string;
     password: string;
 }
+
+interface State {
+    password: string;
+    showPassword: boolean;
+  }

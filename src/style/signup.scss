@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 
 .main-signup{
     display: flex;
@@ -9,7 +9,7 @@ $otherColor: #1976D2;
 .signup-box{
     width: 500px;
     height: fit-content;
-    margin: 120px 0;
+    margin: 60px 0;
     display: flex;
     justify-content: center;
 }
@@ -24,13 +24,15 @@ $otherColor: #1976D2;
         font-family: 'Pacifico', cursive;
         text-align: left;
         margin: 10px 2px;
+        color: $otherColor;
     }
     p{
         font-size: 12px;
         font-family: 'Lato', sans-serif;
         margin: 10px 4px;
+        color: $otherColor;
         a{
-            color: #1976D2;
+            color: $otherColor;
             text-decoration: none;
         }
     }
@@ -38,6 +40,7 @@ $otherColor: #1976D2;
         margin: 15px 5px;
         background-color: $otherColor;
         width: 300px;
+        border: 1px solid #8a5d79;
 
         .MuiButton-label{
             color: #f9f9f9;
@@ -65,6 +68,14 @@ $otherColor: #1976D2;
 
 .signup-footer{
     display: flex;
+    justify-content: space-between;
+    a{
+        font-size: 12px;
+        font-family: 'Lato', sans-serif;
+        margin: 10px 4px;
+        color: #8a5d79;
+        text-decoration: none;
+    }
 }
 
 @media screen and (max-width: 700px){
@@ -80,9 +91,13 @@ $otherColor: #1976D2;
 }
 
 @media screen and (max-width: 450px){
+    .main-signup{
+        margin: 50px 0;
+    }
     .signup-content{
         width: 300px;
         padding: 40px 20px;
+        border-radius: 25px;
         h1{
             font-size: 18px;
         }
@@ -96,5 +111,8 @@ $otherColor: #1976D2;
     .signup-box{
         margin: 30px 0;
         width: 300px;
+    }
+    .form .MuiInputLabel-formControl{
+        color: $otherColor;
     }
 }

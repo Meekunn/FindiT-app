@@ -1,10 +1,9 @@
 import { FC, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { auth, db } from '../../config/firebase'
+import { auth } from '../../config/firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
-import { Button } from "@material-ui/core"
-import { TextField } from '@material-ui/core'
+import { Visibility, VisibilityOff} from '@material-ui/icons'
+import { Button, TextField, InputAdornment } from "@material-ui/core"
 import '../../style/signup.scss'
 
 const SignUp:FC<ILecturersAuth> = (props) => {
@@ -16,13 +15,14 @@ const SignUp:FC<ILecturersAuth> = (props) => {
     const [confirm, setConfirm] = useState<string>('')
     const [error, setError] = useState<string>('')
     const [signup, setSignup] = useState<boolean>(false)
+    const [showpass, setShowpass] = useState<boolean>(true)
+    const [showconfirm, setShowconfirm] = useState<boolean>(true)
 
-    const handleNew = async (id: any) => {
-        const docRef = doc(db, "lecturers", id)
-        const payload = {
-            email
-        }
-        await setDoc(docRef, payload)
+    const handleShowPass = () => {
+        setShowpass(!showpass)
+    }
+    const handleShowConfirm = () => {
+        setShowconfirm(!showconfirm)
     }
 
     const verifyEmail = (user: any) => {
@@ -42,20 +42,21 @@ const SignUp:FC<ILecturersAuth> = (props) => {
 
     const signUp = async (e: any) => {
         e.preventDefault()
+        setSignup(true)
 
         if(password !== confirm){
             setError("Password doesn't match")
             alert("Password does not match")
-        }
-
-        setSignup(true)
-
-        createUserWithEmailAndPassword(auth, email, password)
-        .then( async (userCredential: any) =>{
+            setEmail("")
+            setPassword("")
+            setConfirm("")
+            setSignup(true)
+        } else {
+            createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential: any) =>{
             const user = auth.currentUser
             if(user){
                 verifyEmail(user)
-                await handleNew(userCredential.user.uid)
             }
             history.replace('/setup')
         })
@@ -80,6 +81,7 @@ const SignUp:FC<ILecturersAuth> = (props) => {
         setPassword("")
         setConfirm("")
         setSignup(true)
+        }
     }
 
     return(
@@ -101,8 +103,19 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                         <TextField
                         id="outlined-password-input"
                         label="Password"
-                        type="password"
+                        type={showpass? 'password': 'text'}
                         placeholder='******'
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <button
+                                    style={{padding: '5px', background: 'transparent', outline: 'none', border: 'none', color: '#8a5d79'}}
+                                    onClick={handleShowPass}
+                                    >{showpass? <Visibility /> : <VisibilityOff />}
+                                </button>
+                              </InputAdornment>
+                            ),
+                          }}
                         autoComplete="current-password"
                         value={password}
                         onChange={(e)=>setPassword(e.target.value)}
@@ -110,8 +123,19 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                         <TextField
                         id="outlined-confirmpassword-input"
                         label="Confirm Password"
-                        type="password"
+                        type={showconfirm? 'password': 'text'}
                         placeholder='******'
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <button
+                                    style={{padding: '5px', background: 'transparent', outline: 'none', border: 'none', color: '#8a5d79'}}
+                                    onClick={handleShowConfirm}
+                                    >{showconfirm? <Visibility /> : <VisibilityOff />}
+                                </button>
+                              </InputAdornment>
+                            ),
+                          }}
                         autoComplete="current-password"
                         value={confirm}
                         onChange={(e)=>setConfirm(e.target.value)}
@@ -119,8 +143,8 @@ const SignUp:FC<ILecturersAuth> = (props) => {
                         <Button variant="contained" disabled={signup} onClick={signUp} >GET STARTED</Button>
                     </div>
                     <div className='signup-footer'>
-                        <p>Already have an account?</p>
-                        <p><Link to="/signin">Sign In</Link></p>
+                        <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+                        <Link to='/'>Welcome Page</Link>
                     </div>
                 </div>
             </div>

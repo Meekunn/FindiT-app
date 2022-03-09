@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { doc,setDoc } from 'firebase/firestore'
 import { db, auth, storage } from '../config/firebase'
 import { updateProfile } from 'firebase/auth'
@@ -37,6 +37,10 @@ const departments = [
     {
         value: "Electrical and Electronics Engineering",
         label: "EEE"
+    },
+    {
+        value: "Computer Engineering",
+        label: "CPE"
     }
 ]
 
@@ -52,6 +56,7 @@ const Edit = () => {
     const [photoURL, setPhotoURL] = useState<string>()
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
     const [office, setOffice] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [uploading, setUploading] = useState<boolean>(false)
@@ -63,6 +68,7 @@ const Edit = () => {
         setPhone(state?.phone|| '')
         setTitle(state?.title|| '')
         setDepartment(state?.department || '')
+        setEmail(state?.email || '')
         setLocation(state?.location || '')
         setOffice(state?.office || '')
         setBio(state?.bio || '')
@@ -121,6 +127,7 @@ const Edit = () => {
                 location,
                 office,
                 bio,
+                email,
                 photoURL
             }
             await setDoc(docRef, payload, {merge:true})
@@ -132,9 +139,9 @@ const Edit = () => {
         <div className='setup-wrap'>
             <div className='setup-contain'>
                 <h1>Profile Edit</h1>
-                <p>Dedicated to helping you navigate your relation with lecturers</p>
+                <p>Ensure you fill required field to proceed</p>
                 <div className='img-upload'>
-                    <img src={photoURL} alt='User-Image' />
+                    <img src={photoURL} alt='User' />
                     <input type='file' onChange={handlePhoto}/>
                     <Button variant="outlined" onClick={submitUpload} disabled={uploading || !photo} >Setup Picture</Button>
                 </div>
@@ -142,6 +149,7 @@ const Edit = () => {
                     <TextField
                     id="outlined-uncontrolled"
                     label="Full Name"
+                    required
                     placeholder=""
                     value={name}
                     onChange={(e) =>setName(e.target.value)}
@@ -162,7 +170,13 @@ const Edit = () => {
                     </TextField>
                     <TextField
                     id="outlined-uncontrolled"
-                    
+                    label="Email"
+                    placeholder=""
+                    value={email}
+                    onChange={(e) =>setEmail(e.target.value)}
+                    />
+                    <TextField
+                    id="outlined-uncontrolled"
                     label="Phone Number"
                     placeholder=""
                     value={phone}
@@ -172,6 +186,7 @@ const Edit = () => {
                     id="outlined-select-currency"
                     select
                     label="Department"
+                    required
                     placeholder=""
                     value={department}
                     onChange={handleDepartment}
@@ -185,6 +200,7 @@ const Edit = () => {
                     <TextField
                     id="outlined-uncontrolled"
                     label="Location"
+                    required
                     placeholder="SEET Building"
                     value={location}
                     onChange={(e) =>setLocation(e.target.value)}
@@ -209,7 +225,7 @@ const Edit = () => {
                         <Button variant="outlined" className='busy'>Busy</Button>
                         <Button variant="outlined" className='absent'>Absent</Button>
                     </div>
-                    <Button variant="contained" onClick={handleEdit}><Link to="/dashboard">DONE</Link></Button>
+                    <Button variant="contained" onClick={handleEdit}>DONE</Button>
                 </div>
             </div>
         </div>

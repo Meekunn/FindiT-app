@@ -1,23 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Nunito:wght@200;500;600&display=swap');
 $background : #f3f0f0;
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 $font-color: #5f5c5c;
 
 .nav-wrap {
     background-color: $background;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 15px;
 }
+.nav-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-h1{
-    font-size: 20px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    margin: 8px 15px;
-    color: $font-color;
+    h1{
+        font-size: 20px;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 800;
+        margin: 8px;
+        color: #8a5d79;
+    }
+
+    a{
+        text-decoration: underline;
+        color: #8a5d79;
+        font-size: 15px;
+    }
 }
-
+.search-contents{
+    flex-direction: column;
+}
 .search-contain {
     display: flex;
+
+    .MuiFormControl-root{
+        width: 300px;
+        margin: 15px;
+    }
+    .MuiInputBase-root{
+        font-size: 12px;
+    }
+    .MuiFormLabel-root{
+        font-size: 12px;
+        font-family: 'Nunito', sans-serif;
+    }
+}
+.profile-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media screen and ( max-width: 700px){
+    .nav-wrap{
+        padding: 10px;
+
+        h1{
+            font-size: 15px;
+            margin: 5px;
+        }
+    }
+    .search-contain{
+        flex-direction: column;
+        .MuiFormControl-root{
+            margin: 2px;
+        }
+        .MuiInputBase-root{
+            font-size: 12px;
+        }
+        .MuiFormLabel-root{
+            font-size: 12px;
+            font-family: 'Nunito', sans-serif;
+        }
+    }
+}
+
+@media screen and ( max-width: 450px){
+    .nav-wrap{
+        padding: 10px;
+    }
+    .nav-header{
+        h1{
+            font-size: 15px;
+        }
+        a{
+            font-size: 10px;
+        }
+    }
+    .search-contain{
+        flex-direction: column;
+        .MuiFormControl-root{
+            margin: 2px;
+        }
+        .MuiInputBase-root{
+            font-size: 12px;
+        }
+        .MuiFormLabel-root{
+            font-size: 12px;
+            font-family: 'Nunito', sans-serif;
+        }
+    }
 }

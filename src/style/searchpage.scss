@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Nunito:wght@200;500;600&display=swap');
 $background : #f3f0f0;
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 $font-color: #5f5c5c;
 
 .home-wrapper{
@@ -16,31 +16,51 @@ $font-color: #5f5c5c;
 }
 
 .side-bar{
-    width: 25%;
+    width: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    background-color: #8a5d79;
 
-h2{
-    font-size: 2rem;
-    font-family: 'Dancing Script', cursive;
-    font-weight: 700;
-    color: $font-color;
-    text-align: center;
+    h2{
+        font-size: 1.5rem;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 700;
+        color: $background;
+        text-align: center;
+    }
 }
 
 .contents{
-    width: 75%;
+    width: 85%;
     height: 100vh;
+    overflow: overlay;
     background-color: $background;
 }
 
-.Search{
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-direction: column;
-    top:  0px;
-    left: 0px
+@media screen and (max-width: 700px){
+    .side-bar{
+        width: 20%;
+        h2{
+            font-size: 1.5rem;
+        }
+    }
+    .contents{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .side-bar{
+        width: 20%;
+        padding: 5px;
+        background-color: #8a5d79;
+        h2{
+            font-size: 1rem;
+        }
+    }
+
+    .contents{
+        width: 80%;
+    }
 }

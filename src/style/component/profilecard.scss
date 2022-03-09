@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Nunito:wght@200;500;600&display=swap');
 $background : #f3f0f0;
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 $font-color: #5f5c5c;
 
 .card-wrapper{
+    width: 220px;
+    margin: 5px;
+    height: 300px;
     background-color: white;
-    width: 300px;
-    min-height: 280px;
     border-radius: 16px;
-    margin: 15px;
     padding: 10px;
 }
+
 .card-contain{
     margin: 10px;
 }
@@ -19,17 +20,66 @@ $font-color: #5f5c5c;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    img{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+    h1{
+        font-size: 15px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 800;
+        color: $font-color;
+        text-align: center;
+        margin: 8px;
+    }
+    p{
+        font-size: 10px;
+        color: $font-color;
+        text-align: center;
+        font-family: 'Nunito', sans-serif;
+        margin: 6px;
+    }
+}
+.other-info{
+    p{
+        font-size: 10px;
+        color: $font-color;
+        font-family: 'Nunito', sans-serif;
+        margin: 6px;
+    }
 }
 
-h1{
-    font-size: 17px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    margin: 8px;
+@media screen and ( max-width: 700px){
+    .card-wrapper{
+        width: 200px;
+        margin: 5px;
+        height: fit-content;
+    }
+    .card-contain{
+        margin: 5px;
+    }
+    .main-info{
+        img{
+            height: 50px;
+            width: 50px;
+        }
+    }
 }
-p{
-    font-size: 13px;
-    font-family: 'Nunito', sans-serif;
-    margin: 6px;
-    color: $font-color;
+
+@media screen and (max-width: 450px){
+    .card-wrapper{
+        width: 230px;
+        margin: 5px;
+        height: fit-content;
+    }
+    .card-contain{
+        margin: 5px;
+    }
+    .main-info{
+        img{
+            height: 40px;
+            width: 40px;
+        }
+    }
 }

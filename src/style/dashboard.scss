@@ -1,28 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 
 .dash-wrap{
     display: flex;
     justify-content: center;
-    background-color: #e9e9e9;
+    background-color: #fff;
 }
 
 .dash-contain{
     width: 500px;
+    border-radius: 30px;
     height: fit-content;
     margin: 20px 0;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-}
-h1{
-    font-size: 20px;
-    font-family: 'Pacifico', cursive;
-    text-align: left;
-    margin: 5px 2px;
-}
+    background-color: #e9e9e9;
 
+    h1{
+        font-size: 20px;
+        font-family: 'Pacifico', cursive;
+        text-align: left;
+        margin: 5px 2px;
+        color: #8a5d79;
+        font-weight: 500;
+    }
+}
 .img-upload{
     display: flex;
     flex-direction: column;
@@ -38,17 +41,16 @@ h1{
         margin: 2px;
     }
     .MuiButton-outlined{
-        border: 2px solid $otherColor;
+        border: 2px solid #8a5d79;
         margin: 3px;
         font-family: 'Lato', sans-serif;
         font-weight: 900;
     }
     a{
         text-decoration: none;
-        color: #1976D2;
+        color: $otherColor;
     }
 }
-
 
 .dash-form{
     margin: 5px 0;
@@ -61,7 +63,24 @@ h1{
         .MuiFormLabel-root{
             font-family: 'Lato', sans-serif;
             font-size: 15px;
+            color: #8a5d79;
         }
+        .MuiInputBase-input{
+            font-size: 15px;
+        }
+    }
+    .MuiButton-contained{
+        border: 2px solid #8a5d79;
+        margin-top: 3px;
+        font-size: 13px;
+        a{
+            color: #8a5d79;
+            text-decoration: none;
+        }
+    }
+    .sign-out{
+        background-color: #8a5d79;
+        color: #e9e9e9;
     }
 }
 
@@ -107,22 +126,48 @@ h1{
 
 @media screen and (max-width: 450px){
     .dash-contain{
-        width: 300px;
+        width: 320px;
+        border-radius: 30px;
         height: fit-content;
         margin: 20px 0;
-        padding: 30px 10px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
-        background-color: #fff;
     }
     h1{
         font-size: 15px;
+        margin: 10px;
     }
     .img-upload{
         margin: 5px;
         img{
             width: 50px;
             height: 50px;
+        }
+        .MuiButton-outlined{
+            border: 2px solid $otherColor;
+            a{
+                color: #8a5d79;
+            }
+        }
+    }
+    .dash-form{
+        padding: 0 15px;
+
+        .MuiInputBase-root .MuiInputBase-input{
+            font-size: 10px;
+        }
+        .MuiButton-contained{
+            border: 2px solid #8a5d79;
+            font-size: 10px;
+            a{
+                color: #8a5d79;
+                text-decoration: none;
+            }
+        }
+        .sign-out{
+            background-color: #8a5d79;
+            color: #e9e9e9;
         }
     }
 }

@@ -1,10 +1,10 @@
-import { FC, useState, ChangeEvent, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { FC, useState, ChangeEvent } from 'react'
+import { useHistory } from 'react-router-dom'
 import { auth, db, storage } from '../config/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
 import { ref, getDownloadURL, uploadBytes  } from 'firebase/storage'
-import { Button, TextField, MenuItem, Avatar } from '@material-ui/core'
+import { Button, TextField, MenuItem } from '@material-ui/core'
 import '../style/setup.scss'
 
 const titles = [
@@ -34,6 +34,10 @@ const departments = [
     {
         value: "Electrical and Electronics Engineering",
         label: "EEE"
+    },
+    {
+        value: "Computer Engineering",
+        label: "CPE"
     }
 ]
 
@@ -44,16 +48,16 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
 
 
     const [name, setName] = useState<string>("")
+    const [email, setEmail] = useState<string>('')
     const [title, setTitle] = useState<string>("")
     const [photo, setPhoto] = useState<any>()
-    const [photoURL, setPhotoURL] = useState<string>()
+    const [photoURL, setPhotoURL] = useState<string>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
     const [location, setLocation] = useState<string>("")
+    const [status, setStatus] = useState<string>("absent")
     const [uploading, setUploading] = useState<boolean>(false)
-    const [error, setError] = useState<string>("")
-    const [setup, setSetup] = useState<boolean>(false)
 
     const handlePhoto = (e:any) => {
         if(e.target.files[0])
@@ -85,7 +89,6 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
         uploadPicture(photo,user,setUploading)
     }
     
-
     const handleTitle = (e:ChangeEvent<HTMLInputElement>) =>{
         setTitle(e.target.value)
     }
@@ -103,14 +106,16 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                 name,
                 title,
                 phone,
+                email,
                 department,
                 location,
                 office,
-                photoURL
+                photoURL,
+                status
             }
             await setDoc(docRef, payload, {merge:true})
+            history.replace('/dashboard')
         }
-        history.replace('/dashboard')
     }
 
     return(
@@ -118,15 +123,17 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
             <div className='setup-contain'>
                 <h1>Profile Setup</h1>
                 <p>Dedicated to helping you navigate your relation with lecturers</p>
+                <p>Ensure you fill required field to proceed</p>
                 <div className='img-upload'>
                     <img src={photoURL} alt='User' />
-                    <input type='file' onChange={handlePhoto}/>
+                    <input type='file' required onChange={handlePhoto}/>
                     <Button variant="outlined" onClick={submitUpload} disabled={uploading || !photo} >Setup Picture</Button>
                 </div>
                 <div className='setup-form'>
                     <TextField
                     id="outlined-basic"
                     label="Full Name"
+                    required
                     placeholder=""
                     value={name}
                     onChange={(e) =>setName(e.target.value)}
@@ -134,6 +141,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     <TextField
                     id="outlined-uncontrolled"
                     select
+                    required
                     label="Title"
                     placeholder=""
                     value={title}
@@ -147,6 +155,14 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     </TextField>
                     <TextField
                     id="outlined-basic"
+                    label="Email"
+                    required
+                    placeholder=""
+                    value={email}
+                    onChange={(e) =>setEmail(e.target.value)}
+                    />
+                    <TextField
+                    id="outlined-basic"
                     
                     label="Phone Number"
                     placeholder=""
@@ -156,6 +172,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     <TextField
                     id="outlined-select-currency"
                     select
+                    required
                     label="Department"
                     placeholder=""
                     value={department}
@@ -170,6 +187,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     <TextField
                     id="outlined-basic"
                     label="Location"
+                    required
                     placeholder="SEET Building"
                     value={location}
                     onChange={(e) =>setLocation(e.target.value)}

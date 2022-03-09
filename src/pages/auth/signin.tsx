@@ -2,8 +2,8 @@ import { FC, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { auth } from '../../config/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { Button } from "@material-ui/core"
-import { TextField } from '@material-ui/core'
+import { Visibility, VisibilityOff} from '@material-ui/icons'
+import { Button, TextField, InputAdornment } from "@material-ui/core"
 import '../../style/signin.scss'
 
 const SignIn:FC<IPageProps> = (props) => {
@@ -14,7 +14,11 @@ const SignIn:FC<IPageProps> = (props) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [error, setError] = useState<string>("")
-    const [signin, setSignin] = useState<boolean>(false)
+    const [showpass, setShowpass] = useState<boolean>(true)
+
+    const handleShowPass = () => {
+        setShowpass(!showpass)
+    }
 
     const signIn = (e: any) => {
         e.preventDefault()
@@ -22,7 +26,7 @@ const SignIn:FC<IPageProps> = (props) => {
             setError("")
         }
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential: any) => {
+        .then(() => {
             if(user){
                 if(user.emailVerified){
                     history.push('/dashboard')
@@ -56,17 +60,31 @@ const SignIn:FC<IPageProps> = (props) => {
                         <TextField
                         id="outlined-password-input"
                         label="Password"
-                        type="password"
+                        type={showpass? 'password': 'text'}
                         placeholder='******'
+                        InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <button
+                                    style={{padding: '5px', background: 'transparent', outline: 'none', border: 'none', color: '#8a5d79'}}
+                                    onClick={handleShowPass}
+                                    >{showpass? <Visibility /> : <VisibilityOff />}
+                                </button>
+                              </InputAdornment>
+                            ),
+                          }}
                         autoComplete="current-password"
                         value={password}
                         onChange={(e)=>setPassword(e.target.value)}
                         />
-                        <Button variant="contained" onClick={signIn} >GET STARTED</Button>
+                        <Button variant="contained" onClick={signIn} >SIGN IN</Button>
                     </div>
                     <div className='signin-footer'>
-                        <p>New Here?</p>
-                        <p><Link to='/signup'>Sign Up</Link></p>
+                        <p>New Here? <Link to='/signup'>Sign Up</Link></p>
+                        <Link to='/'>Welcome Page</Link>
+                    </div>
+                    <div className='signin-footer2'>
+                        <Link to='/forgotpassword'>Forgot Password?</Link>
                     </div>
                 </div>
             </div>

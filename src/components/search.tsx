@@ -1,40 +1,22 @@
-import { useEffect, useState, ChangeEvent, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { TextField, MenuItem, List, ListItem, ListItemText } from '@material-ui/core'
-import { Autocomplete } from '@material-ui/lab'
-import { db } from '../config/firebase'
-import { getDocs, collection } from 'firebase/firestore'
+import { TextField } from '@material-ui/core'
 import ProfileCard from './profilecard'
 import '../style/component/search.scss'
 import '../style/searchpage.scss'
-import SearchBar from "material-ui-search-bar"
 
 const Search = () => {
 
-    const departments = [
-        {
-            value: "Information and Communication Technology",
-            label: "ICT"
-        },
-        {
-            value: "Electrical and Electronics Engineering",
-            label: "EEE"
-        }
-    ]
-
-    const [department, setDepartment] = useState<any>([])
-    //const department = createRef<HTMLInputElement>()
     const [searchName, setSearchName] = useState<string>("")
     const [lecturerData, setLecturerData] = useState<any>([])
     const [searchDept, setSearchDept] = useState<string>("")
     const [output, setOutput] = useState<any>([])
     const trimText = useCallback((text: string) => text.replace(/\s+/g,'').toLowerCase(),[])
-    //const [nameOutput, setNameOutput] = useState<any>([])
     //const names:any[] = []
 
     useEffect(() => {
         fetchData()
-        //getNames()
     }, [])
 
     const fetchData = async () => {
@@ -43,25 +25,13 @@ const Search = () => {
         setLecturerData(data)
     }
 
-    // const getNames = async () => {
-    //     const allData: ILecturers[] = []
-    //     const querysnapshot = await getDocs(collection(db, 'lecturers'))
-    //     querysnapshot.forEach((doc:any) => allData.push(doc.data()))
-    //     allData.map((name: any, id: any) => {
-    //         names.push(name.name)
-    //     })
-    //     setNameOutput(names)
-    //     console.log(names, nameOutput)
-    // }
-
-    // const handleDept = (val: string) => {
-    //     setSearchDept(trimText(val))
-    //     const filteredData = lecturerData.filter((data: any) => {
-    //         (data.department).includes(searchDept)
-    //     })
-    //     setOutput(filteredData)
-    //     console.log(output)
-    // }
+    const handleDept = (val: string) => {
+        setSearchDept(trimText(val))
+        const filteredData = lecturerData.filter((data: any) => {
+            return trimText(data.department).includes(searchDept.toLowerCase())
+        })
+        setOutput(filteredData)
+    }
 
     const handleName = (val: string) => {
         setSearchName(trimText(val))
@@ -69,52 +39,51 @@ const Search = () => {
             return trimText(data.name).includes(searchName.toLowerCase())
         })
         setOutput(filteredData)
-        console.log(output)
     }
-
-    const cancelSearch = () => {
-        setSearchName("");
-      };
 
     return(
         <div className='nav-wrap'>
-            <h1>Lecturers</h1>
-            <div className='contents'>
+            <div className='nav-header'>
+                <h1>Lecturers</h1>
+                <Link to='/'>Welcome Page</Link>
+            </div>
+            <div className='search-contents'>
                 <div className='search-contain'>
-                {/* <TextField
-                style={{margin: 10, minWidth: 150}}
+                <TextField
                 id="outlined-select-currency"
-                variant='outlined'
+                variant='standard'
                 label="Department"
                 value={searchDept}
                 onChange={(e) => {setSearchDept(e.target.value); handleDept(e.target.value)}}
-                > */}
+                >
                 {/* {departments.map((option: any) => (
                     <MenuItem key={option.value} value={option.value}>
                     {option.label}
                     </MenuItem>
                 ))} */}
-                {/* </TextField> */}
+                </TextField>
                 <TextField 
                 id='name-search' 
                 label='Search by name' 
-                variant='outlined'
+                variant='standard'
                 value={searchName}
                 onChange={(e) => {setSearchName(e.target.value); handleName(e.target.value)}}>
                 </TextField>
                 </div>
                 <div className='profile-cards'>
-                    {searchName.length > 0 || searchDept.length > 0 ? 
+                    {searchName.length > 0 || searchDept.length > 0? 
                     (output.map((lecturer:any) => {
                             return(
                                 <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
-                                email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department} />
+                                email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department}
+                                photoURL={lecturer.photoURL} bio={lecturer.bio} />
                             )
                         })) :  (
                         lecturerData.map((lecturer:any) => {
                             return(
                                 <ProfileCard key={lecturer.id} name={lecturer.name} title={lecturer.title} phone={lecturer.phone}
-                                email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department} />
+                                email={lecturer.email} location={lecturer.location} office={lecturer.office} department={lecturer.department}
+                                photoURL={lecturer.photoURL} bio={lecturer.bio} />
                             )
                         }))
                     }
@@ -125,3 +94,14 @@ const Search = () => {
 }
 
 export default Search
+
+// const getNames = async () => {
+    //     const allData: ILecturers[] = []
+    //     const querysnapshot = await getDocs(collection(db, 'lecturers'))
+    //     querysnapshot.forEach((doc:any) => allData.push(doc.data()))
+    //     allData.map((name: any, id: any) => {
+    //         names.push(name.name)
+    //     })
+    //     setNameOutput(names)
+    //     console.log(names, nameOutput)
+    // }

@@ -6,7 +6,7 @@ import Edit from "../pages/edit"
 import SearchPage from "../pages/searchpage"
 import ProfileSetup from "../pages/setup"
 import ChangePassword from "../pages/auth/editpass"
-import VerifyPage from "../pages/auth/verifyemail"
+import ForgotPass from "../pages/forgotpass"
 
 const routes:IRoutes[] = [
     {
@@ -65,11 +65,11 @@ const routes:IRoutes[] = [
         name: 'editpassword',
         protected: true
     },{
-        path: '/verifyemail',
+        path: '/forgotpassword',
         exact: true,
-        component: VerifyPage,
-        name: 'verifyemail',
-        protected: true
+        component: ForgotPass,
+        name: 'forgotpassword',
+        protected: false
     }
 ]
 

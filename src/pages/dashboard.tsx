@@ -5,18 +5,16 @@ import { signOut } from 'firebase/auth'
 import { FC, useState, useEffect} from 'react'
 import { auth, db } from '../config/firebase'
 import { TextField, Button } from '@material-ui/core'
-import avatar from '../images/user.png'
 import '../style/dashboard.scss'
 
 const Dashboard:FC<ILecturers> = props => {
 
     const history = useHistory()
-    const img = require('../images/user.png')
 
     const [name, setName] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [bio, setBio] = useState<string>("")
-    const [email, setEmail] = useState<any>()
+    const [email, setEmail] = useState<string>("")
     const [photoURL, setPhotoURL] = useState<any>("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png")
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
@@ -43,24 +41,21 @@ const Dashboard:FC<ILecturers> = props => {
         const docRef = doc(db, "lecturers", id)
         const snapDoc = await getDoc(docRef)
         const docData = snapDoc.data()
-        const user = auth.currentUser
-        if (user !== null) {
-            setEmail(user.email)
-            if(docData){
-                setDash(docData)
-                setName(docData.name)
-                setTitle(docData.title)
-                setPhone(docData.phone)
-                setOffice(docData.office)
-                setDepartment(docData.department)
-                setLocation(docData.location)
-                setBio(docData.bio)
-                setPhotoURL(docData.photoURL)
-            }else{
-                console.log("no data found")
-                return
-            }
-        }  
+        if(docData){
+            setDash(docData)
+            setEmail(docData.email)
+            setName(docData.name)
+            setTitle(docData.title)
+            setPhone(docData.phone)
+            setOffice(docData.office)
+            setDepartment(docData.department)
+            setLocation(docData.location)
+            setBio(docData.bio)
+            setPhotoURL(docData.photoURL)
+        }else{
+            console.log("no data found")
+            return
+        }
     }
 
     const logOut = () => {
@@ -159,7 +154,7 @@ const Dashboard:FC<ILecturers> = props => {
                     value={bio}
                     />
                     <Button variant="contained"><Link to='/editpassword'>Change Password</Link></Button>
-                    <Button variant="contained" onClick={logOut}>SIGNOUT</Button>
+                    <Button variant="contained" className='sign-out' onClick={logOut}>SIGNOUT</Button>
                 </div>
             </div>
         </div>

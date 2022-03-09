@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
+$otherColor: #8a5d79;
+
+.pass-wrapper{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9e9e9;
+}
+
+.pass-contain{
+    width: 500px;
+    height: fit-content;
+    border-radius: 30px;
+    margin: 50px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+
+    h1{
+        font-size: 20px;
+        font-family: 'Pacifico', cursive;
+        text-align: center;
+        margin: 5px 2px;
+        color: #8a5d79;
+    }
+    p{
+        font-size: 12px;
+        font-family: 'Lato', sans-serif;
+        margin: 5px;
+        text-align: left;
+    }
+}
+
+.pass-form{
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+
+    .MuiFormControl-root{
+        margin-top: 5px;
+
+        .MuiFormLabel-root{
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            color: #8a5d79;
+        }
+    }
+    .MuiButton-contained{
+        margin: 10px;
+        background-color: #8a5d79;
+        color: #e9e9e9;
+    }
+    a{
+        font-size: 15px;
+        font-family: 'Lato', sans-serif;
+    }
+}

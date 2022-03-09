@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 
 .main-signin{
     display: flex;
@@ -22,13 +22,15 @@ $otherColor: #1976D2;
         font-family: 'Pacifico', cursive;
         text-align: left;
         margin: 10px 2px;
+        color: #8a5d79;
     }
     p{
         font-size: 12px;
         font-family: 'Lato', sans-serif;
         margin: 10px 4px;
+        color: #8a5d79;
         a{
-            color: #1976D2;
+            color: #8a5d79;
             text-decoration: none;
         }
     }
@@ -36,6 +38,7 @@ $otherColor: #1976D2;
         margin: 15px 5px;
         background-color: $otherColor;
         width: 300px;
+        border: 1px solid $otherColor;
 
         .MuiButton-label{
             color: #f9f9f9;
@@ -63,6 +66,25 @@ $otherColor: #1976D2;
 
 .signin-footer{
     display: flex;
+    justify-content: space-between;
+    a{
+        font-size: 12px;
+        font-family: 'Lato', sans-serif;
+        margin: 10px 4px;
+        color: #8a5d79;
+        text-decoration: none;
+    }
+}
+.signin-footer2{
+    display: flex;
+    justify-content: center;
+    a{
+        font-size: 12px;
+        font-family: 'Lato', sans-serif;
+        margin: 5px;
+        color: #8a5d79;
+        text-decoration: none;
+    }
 }
 
 
@@ -76,12 +98,13 @@ $otherColor: #1976D2;
 @media screen and (max-width: 450px){
     .signin-box{
         height: fit-content;
-        margin: 50px 0;
+        margin: 80px 0;
         display: flex;
     }
     .signin-content{
         width: 300px;
         padding: 40px 30px;
+        border-radius: 30px;
         .MuiButton-contained {
             width: 230px;
         }

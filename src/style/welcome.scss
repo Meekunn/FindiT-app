@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Pacifico&display=swap');
-$otherColor: #1976D2;
+$otherColor: #8a5d79;
 
 .main-welcome{
     display: flex;
@@ -17,15 +17,17 @@ $otherColor: #1976D2;
     width: 400px;
     height: fit-content;
     padding: 100px 50px;
+    border-radius: 30px;
 
     h1{
         font-size: 20px;
         font-family: 'Pacifico', cursive;
         text-align: center;
         margin: 10px 2px;
+        color:#8a5d79;
     }
     p{
-        color: #767171;
+        color: #8a5d79;
         font-size: 15px;
         font-family: 'Lato', sans-serif;
         margin: 10px 4px;
@@ -114,7 +116,7 @@ $otherColor: #1976D2;
     .welcome-box{
         width: 300px;
         height: 0;
-        margin: 50px 0;
+        margin: 80px 0;
     }
     .box-content{
         width: 300px;

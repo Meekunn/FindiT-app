@@ -4,7 +4,7 @@ import { auth } from '../../config/firebase'
 import { updatePassword } from 'firebase/auth'
 import { FormControl, Input, InputLabel, InputAdornment, Button } from '@material-ui/core'
 import { Visibility, VisibilityOff} from '@material-ui/icons'
-import '../../style/setup.scss'
+import '../../style/editpass.scss'
 
 const ChangePassword = () => {
 
@@ -60,10 +60,10 @@ const ChangePassword = () => {
         return <Redirect to="/" />
 
     return(
-        <div className="setup-wrap">
-                <div className='setup-contain' >
+        <div className="edit-wrap">
+                <div className='edit-contain' >
                     <h1>Change Password</h1>
-                    <div className='setup-form'>
+                    <div className='edit-form'>
                                 <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
                                     <InputLabel htmlFor="standard-adornment-password" shrink={true} >Old Password</InputLabel>
                                     <Input
@@ -78,7 +78,7 @@ const ChangePassword = () => {
                                     endAdornment={
                                         <InputAdornment position='end'>
                                             <button
-                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none', color: '#8a5d79'}}
                                             onClick={handleShowOld}
                                             >{showold? <Visibility /> : <VisibilityOff />}
                                             </button>
@@ -100,7 +100,7 @@ const ChangePassword = () => {
                                     endAdornment={
                                         <InputAdornment position='end'>
                                             <button
-                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none', color: '#8a5d79'}}
                                             onClick={handleShowNew}
                                             >{showpass? <Visibility /> : <VisibilityOff />}
                                             </button>
@@ -122,7 +122,7 @@ const ChangePassword = () => {
                                     endAdornment={
                                         <InputAdornment position='end'>
                                             <button
-                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none', color: '#8a5d79'}}
                                             onClick={() => handleShowConfirm()}
                                             >{showconfirm? <Visibility /> : <VisibilityOff />}
                                             </button>
@@ -133,11 +133,12 @@ const ChangePassword = () => {
                         <Button
                         onClick={changePasswordRequest}
                         disabled={changing}
+                        variant="contained"
                         style={{marginTop: '5px'}}
                         >Change Password
                         </Button>
                         <div className='links'>
-                            <Link to='/'>&#8592 Home Page</Link>
+                            <Link to='/dashboard'>Back to Dashboard</Link>
                         </div>
                     </div>
                 </div>
