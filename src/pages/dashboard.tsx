@@ -19,6 +19,7 @@ const Dashboard:FC<ILecturers> = props => {
     const [phone, setPhone] = useState<string>("")
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
+    const [status, setStatus] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [dash, setDash] = useState<any>({})
 
@@ -52,6 +53,7 @@ const Dashboard:FC<ILecturers> = props => {
             setLocation(docData.location)
             setBio(docData.bio)
             setPhotoURL(docData.photoURL)
+            setStatus(docData.status)
         }else{
             console.log("no data found")
             return
@@ -152,6 +154,16 @@ const Dashboard:FC<ILecturers> = props => {
                     multiline
                     label="Bio"
                     value={bio}
+                    />
+                    <TextField
+                    id="outlined-uncontrolled"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    multiline
+                    label="You are currently"
+                    value={status}
                     />
                     <Button variant="contained"><Link to='/editpassword'>Change Password</Link></Button>
                     <Button variant="contained" className='sign-out' onClick={logOut}>SIGNOUT</Button>

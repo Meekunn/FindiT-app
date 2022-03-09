@@ -56,7 +56,7 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
     const [department, setDepartment] = useState<string>("")
     const [office, setOffice] = useState<string>("")
     const [location, setLocation] = useState<string>("")
-    const [status, setStatus] = useState<string>("absent")
+    const [status, setStatus] = useState<string>("")
     const [uploading, setUploading] = useState<boolean>(false)
 
     const handlePhoto = (e:any) => {
@@ -116,6 +116,19 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
             await setDoc(docRef, payload, {merge:true})
             history.replace('/dashboard')
         }
+    }
+
+    const statusActive = () => {
+        setStatus("active")
+        console.log("user is active")
+    }
+    const statusBusy = () => {
+        setStatus("busy")
+        console.log("user is busy")
+    }
+    const statusAbsent = () => {
+        setStatus("absent")
+        console.log("user is absent")
     }
 
     return(
@@ -200,9 +213,9 @@ const ProfileSetup:FC<ILecturerBasic> = props => {
                     onChange={(e) =>setOffice(e.target.value)}
                     />
                     <div className="status-btns">
-                        <Button variant="outlined" className='active'>Active</Button>
-                        <Button variant="outlined" className='busy'>Busy</Button>
-                        <Button variant="outlined" className='absent'>Absent</Button>
+                        <Button variant="outlined" className='active' onClick={statusActive} >Active</Button>
+                        <Button variant="outlined" className='busy' onClick={statusBusy} >Busy</Button>
+                        <Button variant="outlined" className='absent' onClick={statusAbsent} >Absent</Button>
                     </div>
                     <Button variant="contained" onClick={handleSetup}>DONE</Button>
                 </div>

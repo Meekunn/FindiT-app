@@ -91,7 +91,7 @@ $otherColor: #8a5d79;
         font-family: 'Lato', sans-serif;
         font-weight: 900;
     }
-    .active:hover{
+    .active:hover, .active:active{
         border: 1.5px solid #16e716;
         background-color: #16e716;
         font-family: 'Lato', sans-serif;
@@ -102,7 +102,7 @@ $otherColor: #8a5d79;
         font-family: 'Lato', sans-serif;
         font-weight: 900;
     }
-    .busy:hover{
+    .busy:hover, .busy:active{
         border: 1.5px solid #ffef0c;
         background-color: #ffef0c;
         font-family: 'Lato', sans-serif;
@@ -113,7 +113,7 @@ $otherColor: #8a5d79;
         font-family: 'Lato', sans-serif;
         font-weight: 900;
     }
-    .absent:hover{
+    .absent:hover, .absent:active{
         border: 1.5px solid #e13d3d;
         background-color: #e13d3d;
         font-family: 'Lato', sans-serif;
